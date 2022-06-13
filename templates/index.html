@@ -1,12 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello World</h1>
+<h1>Posts</h1>
+{% for post in object_list %}
+<p>{{ post.title }}</p>
+{% if "placeholder" in post.featured_image.url %}
+<img class="card-img-top" src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
+{% else %}
+<img class="card-img-top" src=" {{ post.featured_image.url }}">
+{% endif %}
+<p>{{ post.author }}</p>
+<p>{{ post.excerpt }}</p>
+<p> {{ post.category }}</p>
+{% if post.status == 1 %}
+<p>Published on: {{ post.created_on }}</p>
+{% endif %}
+{% endfor %}
+
+
+<a href="{% url 'view_post' post.slug %}" class="post-link">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-text">{{ post.excerpt }}</p>
+</a>
 </body>
-</html>
