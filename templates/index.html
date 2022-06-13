@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>Posts</h1>
 {% for post in object_list %}
 <p>{{ post.title }}</p>
@@ -6,6 +10,10 @@
 {% else %}
 <img class="card-img-top" src=" {{ post.featured_image.url }}">
 {% endif %}
+<a href="{% url 'view_story' post.slug %}" class="post-link">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-text">{{ post.excerpt }}</p>
+</a>
 <p>{{ post.author }}</p>
 <p>{{ post.excerpt }}</p>
 <p> {{ post.category }}</p>
@@ -15,8 +23,4 @@
 {% endfor %}
 
 
-<a href="{% url 'view_post' post.slug %}" class="post-link">
-    <h2 class="card-title">{{ post.title }}</h2>
-    <p class="card-text">{{ post.excerpt }}</p>
-</a>
-</body>
+{%endblock%}
