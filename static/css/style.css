@@ -112,7 +112,7 @@ p {
 .cd-tb {
     background-color: var(--dark-blue);
     color: var(--white);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     width: 20rem;
     height: 15.5vh;
     position: relative;
@@ -323,14 +323,14 @@ button,
     width: 100%;
     bottom: 0;
     z-index: -555;
-    font-size: 12px;
+    font-size: 10px;
     background-color: var(--dark-blue);
-    text-align: center;
+    text-align: end;
     color: var(--white);
 }
 
-.copyright-text {
-    margin-right: 10px;
+#copyright-text {
+    margin-right: 40px;
 }
 
 /*------------------------- media screen styling */

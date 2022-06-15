@@ -23,7 +23,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-lg-8">
-
+{% if post.content %}
       <!-- Post content-->
       {% for post in posts %}
       <article class="mb-5">
@@ -54,6 +54,10 @@
         </div>
       </article>
       {% endfor %}
+      {% else %}
+      <img class="card-img-top" src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
+{% endif %}
+
     </div>
     {% if is_paginated %}
     <nav aria-label="Page navigation">
