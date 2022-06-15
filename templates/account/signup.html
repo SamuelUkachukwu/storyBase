@@ -1,0 +1,31 @@
+{% extends "story/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup to storyBASS" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-8 text-center">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="mt-8">
+        <h1 class="bd-font mt-5">{% trans "Signup to" %}<span class="logo1"> story</span><span class="logo2">BASS </span><i class="fas fa-pen-alt"></i></h1>
+      </div>
+      
+      <div class="mt-2 mb-3">
+        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign
+            in</a>.{% endblocktrans %}
+        </p>
+      </div>
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="mt-3 bd-font rounded-pill log-btn" type="submit">{% trans "Sign Up" %}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
