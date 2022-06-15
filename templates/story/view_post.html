@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+{% extends "story/base.html" %}
+{% block title %}storyBASE {{ post.slug }}{% endblock %}
 {% block navcontent %}
     <ul class="nav">
       {% if user.is_authenticated %}

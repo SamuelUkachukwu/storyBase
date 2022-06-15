@@ -1,4 +1,6 @@
-{% extends "base.html" %}
+{% extends "story/base.html" %}
+{% block title %}storyBASE Home{% endblock %}
+
 {% block navcontent %}
     <ul class="nav">
       {% if user.is_authenticated %}
@@ -23,7 +25,7 @@
     <div class="col-lg-8">
 
       <!-- Post content-->
-      {% for post in post_list %}
+      {% for post in posts %}
       <article class="mb-5">
           <div class="row m-0 col-md-12 justify-content-between padding">
             <p class="col-md-6 username">Post By: <span class="bd-font">{{ post.author }}</span></p>
@@ -53,37 +55,33 @@
       </article>
       {% endfor %}
     </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 
     <!----site news content -->
     <div class="col-lg-4">
+      {% for cat in cat_list %}
       <div class="card cd-tb">
         <img src="assets/images/revenant wallpaper.jpg" class="card-img-top" alt="...">
         <div class="txt-back-drop">
           <div class="card-body card-bd padding">
-            <h5 class="bd-font">Revenant Apex predator</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
+            <h5 class="bd-font">{{ cat.name }}</h5>
+            <p class="card-text">{{ cat.describe }}</p>
           </div>
         </div>
       </div>
-      <div class="card cd-tb">
-        <img src="assets/images/wp3890466.jpg" class="card-img-top" alt="...">
-        <div class="txt-back-drop"></div>
-        <div class="card-body card-bd padding">
-          <h5 class="bd-font">Bloodborne</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-        </div>
-      </div>
-      <div class="card cd-tb">
-        <img src="assets/images/gibralta apex legend.jpg" class="card-img-top" alt="...">
-        <div class="txt-back-drop"></div>
-        <div class="card-body card-bd padding">
-          <h5 class="bd-font">Apex Legend</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
   </div>

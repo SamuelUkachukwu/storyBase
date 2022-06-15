@@ -10,7 +10,7 @@ from django.urls import reverse
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by("-created_on")
-    template_name = "index.html"
+    template_name = "story/index.html"
     context_object_name = 'posts'  
     paginate_by = 10
 
@@ -22,12 +22,12 @@ class PostList(generic.ListView):
 
 class ViewStory(generic.DetailView):
     model = Post
-    template_name = 'view_post.html'
+    template_name = 'story/view_post.html'
 
 
 class AddArticle(generic.CreateView):
     model = Post
-    template_name = 'add_post.html'
+    template_name = 'story/add_post.html'
     fields = [
         'title',
         'author',
