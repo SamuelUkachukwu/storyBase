@@ -9,6 +9,8 @@ STATUS = ((0, 'Draft'), (1, 'Published'))
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=30)
+    describe = models.TextField(max_length=200, default='category text')
+    cat_image = CloudinaryField('image', default='category_placeholder')
 
     def __str__(self):
         return self.name
