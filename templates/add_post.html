@@ -1,0 +1,11 @@
+{% extends 'base.html' %} 
+{% block title %}storyBASE Add story {% endblock %}
+
+{% block content %}
+<h1>Add new story here</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+    </form>
+{%endblock%}

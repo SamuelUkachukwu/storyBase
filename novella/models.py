@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.urls import reverse
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
 
@@ -38,6 +39,9 @@ class Post(models.Model):
         
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+    def get_absolute_url(self):
+        return reverse('index.html', args=(str(self.title)))
 
     def number_of_likes(self):
         return self.likes.count()

@@ -1,6 +1,7 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block title %}storyBASE {{ post.slug }}{% endblock %}{% block content %}
 
-
+<a href="{% url 'home' %}">Home</a>
 <h1 class="post-title">{{ post.title }}</h1>
 <!-- Post author goes before the | the post's created date goes after -->
 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
