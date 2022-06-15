@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block navcontent %}
+    <ul class="nav">
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+        </li>
+        <li class="nav-item call-to-atn">
+          <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
+        </li>
+      {% endif %}
+    </ul>
+{% endblock %}
+{% block content %}
+
+
+  <!---------------content header -->
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col-lg-8 post-bg padding mb-2">
+        <div class="row display-box g-0">
+          <div class="title-box">
+            <div class="post-title">
+              <h1 class="fs-5 post-title"><span class=" bd-font">{{ post.title }}</span><br><span>By:
+                </span><span class="bd-font">{{ post.author }}</span></h1>
+            </div>
+          </div>
+          <div class="col-md-7 display-bg">
+            {% if "placeholder" in post.featured_image.url %}
+            <img class="card-img-top" src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
+            {% else %}
+            <img class="article-img" src="{{ post.featured_image.url }}" alt="image from post">
+            {% endif %}
+          </div>
+          <div class="col-md-5 display-sm">
+            <h1 class="padding post-date">{{ post.created_on}}</h1>
+          </div>
+        </div>
+        <div class="post-body padding">
+            {{ post.content | safe }}
+        </div>
+        <div class="reaction padding">
+          <p><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span></p>
+          <p><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span></p>
+          <p><i class="far fa-comment-alt"></i><span> 0</span></p>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-12 mt-2">
+            <h3 class="padding comment bd-font">Comments:</h3>
+            <div class="comment-box padding">
+              <p><span class="bd-font">ozy15</span> June 2, 2022, 7:11 p.m. wrote:</p>
+              <p class="comment-txt mb-2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta, id.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 author-info">
+        <div class="side-info">
+          <div class="user-card padding">
+            <div class="center mt-3 d-flex justify-content-center">
+              <div class="profile-pic-box">
+                <img class="profile-img" src="#" alt="user profile pic">
+              </div>
+            </div>
+
+            <div class="username padding d-flex justify-content-center">
+              <p class="text-style"> username</p>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <ul>
+                <div class="padding">
+                  <li class="list-unstyled"><i class="fas fa-user"></i><a
+                      class="padding text-decoration-none text-style" href="#">Follow Author</a></li>
+                </div>
+                <div class="padding">
+                  <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
+                      class="padding text-decoration-none text-style" href="{% url 'profile_public' %}">Posts By: <br>
+                      {{ post.author }}</a></li>
+                </div>
+                <div class="padding">
+                  <li class="list-unstyled"><i class="fas fa-file-alt"></i><a
+                      class="padding text-decoration-none text-style" href="#">Submit Story</a></li>
+                </div>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
