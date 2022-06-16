@@ -1,5 +1,6 @@
-from django.views import generic
-from .models import Post, Category
+from django.shortcuts import render, get_object_or_404
+from django.views import generic, View
+from .models import Post, Category, Profile
 from .forms import CommentForm
 from django.urls import reverse
 
@@ -20,9 +21,54 @@ class PostList(generic.ListView):
         context["cat_list"] = cat_list
         return context
 
-class ViewStory(generic.DetailView):
-    model = Post
-    template_name = 'story/view_post.html'
+
+class ViewStory(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comments = post.comments.all().order_by("-created_on")
+
+        return render(
+            request,
+            "story/view_post.html",
+            {
+                "post": post,
+                "comments": comments,
+                "comment_form": CommentForm()
+            },
+        )
+
+    def post(self, request, slug, *args, **kwargs):
+
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comments = post.comments.all().order_by("-created_on")
+        
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment_form.instance.name = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+        else:
+            comment_form = CommentForm()
+
+        return render(
+            request,
+            "story/view_post.html",
+            {
+                "post": post,
+                "comments": comments,
+                "comment_form": comment_form,
+            },
+        )
+
+
+class ViewProfile(generic.DetailView):
+    model = Profile
+    template_name = 'story/profile_public.html'
+    queryset = Profile.objects.all()
 
 
 class AddArticle(generic.CreateView):
@@ -30,6 +76,7 @@ class AddArticle(generic.CreateView):
     template_name = 'story/add_post.html'
     fields = [
         'title',
+        'slug',
         'author',
         'category',
         'content',

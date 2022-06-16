@@ -1,4 +1,5 @@
 {% extends "story/base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}storyBASE {{ post.slug }}{% endblock %}
 {% block navcontent %}
     <ul class="nav">
@@ -47,16 +48,34 @@
         <div class="reaction padding">
           <p><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span></p>
           <p><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span></p>
-          <p><i class="far fa-comment-alt"></i><span> 0</span></p>
+          {% with comments.count as total_comments %}
+          <p><i class="far fa-comment-alt" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></i><span> {{ total_comments }}</span></p>
+          {% endwith %}
         </div>
+        <!--  -->
+      <div class="collapse" id="collapseExample">
+        {% if user.is_authenticated %}
+        <p>Leave a comment as: {{ user.username }}</p>
+        <div class="card card-body">
+          <form method="post" style="margin-top: 1.3em;">
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+        </form>
+        </div>
+        {% endif %}
+      </div>
+        <!--  -->
         <hr>
         <div class="row">
           <div class="col-md-12 mt-2">
             <h3 class="padding comment bd-font">Comments:</h3>
+            {% for comment in comments %}
             <div class="comment-box padding">
-              <p><span class="bd-font">ozy15</span> June 2, 2022, 7:11 p.m. wrote:</p>
-              <p class="comment-txt mb-2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta, id.</p>
+              <p><span class="bd-font">{{ comment.name }}: </span>{{ comment.created_on }}</p>
+              <p class="comment-txt mb-1">{{ comment.body}}</p>
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -71,23 +90,23 @@
             </div>
 
             <div class="username padding d-flex justify-content-center">
-              <p class="text-style"> username</p>
+              <p class="text-style"> {{ post.author }}</p>
             </div>
 
             <div class="d-flex justify-content-center">
-              <ul>
+              <ul class="p-0">
                 <div class="padding">
                   <li class="list-unstyled"><i class="fas fa-user"></i><a
                       class="padding text-decoration-none text-style" href="#">Follow Author</a></li>
                 </div>
                 <div class="padding">
                   <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
-                      class="padding text-decoration-none text-style" href="{% url 'profile_public' %}">Posts By: <br>
+                      class="padding text-decoration-none text-style" href="{% url 'authors_profile' %}">
                       {{ post.author }}</a></li>
                 </div>
                 <div class="padding">
                   <li class="list-unstyled"><i class="fas fa-file-alt"></i><a
-                      class="padding text-decoration-none text-style" href="#">Submit Story</a></li>
+                      class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
                 </div>
               </ul>
             </div>

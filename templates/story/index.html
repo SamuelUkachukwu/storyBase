@@ -23,7 +23,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-lg-8">
-{% if post.content %}
+
       <!-- Post content-->
       {% for post in posts %}
       <article class="mb-5">
@@ -38,7 +38,7 @@
           <img class="article-img" src="{{ post.featured_image.url }}" alt="image from post">
           {% endif %}
           <div class="image-flash">
-            <a href="{% url 'post_detail' post.slug %}" class="post-link">
+            <a href="{% url 'view_post' post.slug %}" class="post-link">
               <h1 class="fs-5 bd-font post-title">{{ post.title }}</h1>
             </a>
           </div>
@@ -54,9 +54,6 @@
         </div>
       </article>
       {% endfor %}
-      {% else %}
-      <img class="card-img-top" src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
-{% endif %}
 
     </div>
     {% if is_paginated %}
@@ -77,7 +74,7 @@
     <div class="col-lg-4">
       {% for cat in cat_list %}
       <div class="card cd-tb">
-        <img src="assets/images/revenant wallpaper.jpg" class="card-img-top" alt="...">
+        <img src="assets/images/revenant wallpaper.jpg" class="card-img-top" alt="category image placeholders">
         <div class="txt-back-drop">
           <div class="card-body card-bd padding">
             <h5 class="bd-font">{{ cat.name }}</h5>
