@@ -74,7 +74,7 @@
     <div class="col-lg-4">
       {% for cat in cat_list %}
       <div class="card cd-tb">
-        <img src="assets/images/revenant wallpaper.jpg" class="card-img-top" alt="category image placeholders">
+        <img src="{{ cat.cat_image.url }}" class="card-img-top" alt="category image placeholders">
         <div class="txt-back-drop">
           <div class="card-body card-bd padding">
             <h5 class="bd-font">{{ cat.name }}</h5>

@@ -68,7 +68,14 @@ class ViewStory(View):
 class ViewProfile(generic.DetailView):
     model = Profile
     template_name = 'story/profile_public.html'
-    queryset = Profile.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        # user = Profile.objects.all()
+        context = super(ViewProfile, self).get_context_data(*args, **kwargs)
+
+        authors_page = get_object_or_404(Profile, id=self.kwargs['user_id'])
+        context["authors_page"] = authors_page
+        return context
 
 
 class AddArticle(generic.CreateView):
