@@ -20,7 +20,7 @@ class Post(models.Model):
     title = models.CharField(max_length=30, unique=True)
     slug = models.SlugField(max_length=30, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='author_post')
+        User, on_delete=models.CASCADE, related_name='story_post')
     updated_on = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='post')
@@ -59,6 +59,9 @@ class Profile(models.Model):
     
     def __str__(self):
         return str(self.user)
+
+    def get_absolute_url(self):
+        return reverse("user", kwargs={'pk': self.pk})
 
 
 class Comment(models.Model):

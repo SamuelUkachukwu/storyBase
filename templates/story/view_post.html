@@ -29,6 +29,8 @@
             <div class="post-title">
               <h1 class="fs-5 post-title"><span class=" bd-font">{{ post.title }}</span><br><span>By:
                 </span><span class="bd-font">{{ post.author }}</span></h1>
+                <!-- <p>{{ post.author }}</p> -->
+                <!-- <p>{{ post.category.name }}</p> -->
             </div>
           </div>
           <div class="col-md-7 display-bg">
@@ -101,7 +103,7 @@
                 </div>
                 <div class="padding">
                   <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
-                      class="padding text-decoration-none text-style" href="{% url 'author' post.author.id %}">
+                      class="padding text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}">
                       {{ post.author }}</a></li>
                 </div>
                 <div class="padding">

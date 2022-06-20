@@ -65,17 +65,15 @@ class ViewStory(View):
         )
 
 
-class ViewProfile(generic.DetailView):
-    model = Profile
+class ViewProfile(generic.ListView):
+    model = Post, Profile
+    paginate_by = 7
+    context_object_name = 'author_posts'
     template_name = 'story/profile_public.html'
 
-    def get_context_data(self, *args, **kwargs):
-        # user = Profile.objects.all()
-        context = super(ViewProfile, self).get_context_data(*args, **kwargs)
-
-        authors_page = get_object_or_404(Profile, id=self.kwargs['user_id'])
-        context["authors_page"] = authors_page
-        return context
+    def get_queryset(self):
+        author_id = self.kwargs['pk']
+        return Post.objects.filter(author=author_id).order_by("-created_on")
 
 
 class AddArticle(generic.CreateView):
