@@ -1,32 +1,78 @@
 {% extends "story/base.html" %}
-{% block title %}storyBASE Author Profile{% endblock %}
+{% block title %}storyBASE author profile public {% endblock %}
 
 {% block navcontent %}
-    <ul class="nav">
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-        </li>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-        </li>
-        <li class="nav-item call-to-atn">
-          <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
-        </li>
-      {% endif %}
-    </ul>
+<ul class="nav">
+  {% if user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+  </li>
+  {% else %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+  </li>
+  <li class="nav-item call-to-atn">
+    <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
+  </li>
+  {% endif %}
+</ul>
 {% endblock %}
 {% block content %}
 
-<!-- page content -->
-<h1>Helllllooo</h1>
-{{ post.author }}
-{{ user.profile.bio }}
 
 
-{% for post in user.posts %}
-<p>{{ user.post }} hello</p>
-{% endfor %}
+<!---------------------- tmplate this section below--- -->
+
+<div class="container-md">
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <div class="profile">
+        <div class="avatar">
+          {% if "placeholder_img" in post.author.profile_image %}
+          <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;"
+            src="https://res.cloudinary.com/shybold/image/upload/v1655864027/logo2_haglwi.png" alt="profile image">
+          {% else %}
+          <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src=""
+            alt="profile image">
+          {% endif %}
+
+        </div>
+        <div class="name-field padding d-flex align-items-center justify-content-center">
+          <h1 class="profile-name mt-3 fs-5">{{post.author}}</h1>
+        </div>
+      </div>
+      <div class="mb-3">
+        <h1 class="bd-font fs-5">Bio:</h1>
+        <p class="bio padding">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi dolor alias suscipit
+          aliquid consectetur ratione ab modi nostrum. Eaque consequatur, sequi ex reprehenderit repellat tempora quidem
+          est aspernatur laudantium ipsa voluptatibus exercitationem magni ea accusamus sit modi libero odit distinctio
+          atque dolorem quos dignissimos. Cupiditate vitae repellendus qui fugiat laboriosam.</p>
+        <div class=" bio mt-2 padding d-flex justify-content-center mb-5">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- stories submited by author -->
+    <div class="col-md-8">
+      <!--  -->
+      <ul>
+        {% for post in posts %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title bd-font">{{ post.title }}</h5>
+            <p class="card-text"> {{ post.excerpt }}</p>
+            <div class="padding">
+              <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i class="fab fa-readme"></i>...READ STORY</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </ul>
+      <!--  -->
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}

@@ -77,7 +77,7 @@
         <img src="{{ cat.cat_image.url }}" class="card-img-top" alt="category image placeholders">
         <div class="txt-back-drop">
           <div class="card-body card-bd padding">
-            <h5 class="bd-font"><a href="{% url 'category' cat.id %}">{{ cat.name }}</a></h5>
+            <a class="bd-font fs-5 nav-link p-0" href="{% url 'category' cat.id %}">{{ cat.name }}</a>
             <p class="card-text">{{ cat.describe }}</p>
           </div>
         </div>
