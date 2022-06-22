@@ -21,8 +21,12 @@
 
 <!-- page content -->
 <h1>Helllllooo</h1>
-{% for x in authors_post %}
-<p>{{ x.post }}</p>
+{{ post.author }}
+{{ user.profile.bio }}
+
+
+{% for post in user.posts %}
+<p>{{ user.post }} hello</p>
 {% endfor %}
 
 {% endblock %}

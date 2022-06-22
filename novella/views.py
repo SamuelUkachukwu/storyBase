@@ -68,12 +68,17 @@ class ViewStory(View):
 class ViewProfile(generic.ListView):
     model = Post, Profile
     paginate_by = 7
-    context_object_name = 'author_posts'
+    context_object_name = 'posts'
     template_name = 'story/profile_public.html'
 
     def get_queryset(self):
         author_id = self.kwargs['pk']
         return Post.objects.filter(author=author_id).order_by("-created_on")
+
+
+def CategoryView(request, category):
+    post_cat = Post.objects.filter(category=category)
+    return render(request, 'story/category.html', {'category': category, 'post_cat': post_cat})
 
 
 class AddArticle(generic.CreateView):
