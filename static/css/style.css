@@ -333,6 +333,10 @@ button,
     margin-right: 40px;
 }
 
+/* .social-style{
+    color: var(--white);
+
+} */
 /*------------------------- media screen styling */
 @media screen and (max-width: 992px) {
 

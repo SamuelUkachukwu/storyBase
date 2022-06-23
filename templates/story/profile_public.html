@@ -32,21 +32,18 @@
           <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;"
             src="https://res.cloudinary.com/shybold/image/upload/v1655864027/logo2_haglwi.png" alt="profile image">
           {% else %}
-          <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src=""
+          <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src="{{ author.profile_image.url }}"
             alt="profile image">
           {% endif %}
 
         </div>
         <div class="name-field padding d-flex align-items-center justify-content-center">
-          <h1 class="profile-name mt-3 fs-5">{{post.author}}</h1>
+          <h1 class="profile-name mt-3 fs-5">{{author}}</h1>
         </div>
       </div>
       <div class="mb-3">
         <h1 class="bd-font fs-5">Bio:</h1>
-        <p class="bio padding">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi dolor alias suscipit
-          aliquid consectetur ratione ab modi nostrum. Eaque consequatur, sequi ex reprehenderit repellat tempora quidem
-          est aspernatur laudantium ipsa voluptatibus exercitationem magni ea accusamus sit modi libero odit distinctio
-          atque dolorem quos dignissimos. Cupiditate vitae repellendus qui fugiat laboriosam.</p>
+        <p class="bio padding">{{ author.bio }}</p>
         <div class=" bio mt-2 padding d-flex justify-content-center mb-5">
           <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
@@ -56,7 +53,7 @@
     <!-- stories submited by author -->
     <div class="col-md-8">
       <!--  -->
-      <ul>
+      
         {% for post in posts %}
         <div class="card mb-3">
           <div class="card-body">
@@ -68,7 +65,16 @@
           </div>
         </div>
         {% endfor %}
-      </ul>
+      
+        <div class="card mb-5 bg-success bg-opacity-50">
+          <div class="card-body d-flex justify-content-evenly">
+            <p>Avid Reader? Join <span class="logo1">story</span><span class="logo2">BASE </span><i class="fas fa-pen-alt"></i></p>
+              <a class="text-style" href="https://twitter.com/" target="_blank" aria-label="visit our twitter page"><i class="fab fa-twitter"></i></a>
+              <a class="text-style" href="https://www.facebook.com/" target="_blank" aria-label="visit our twitter page"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+       
+        
       <!--  -->
     </div>
   </div>

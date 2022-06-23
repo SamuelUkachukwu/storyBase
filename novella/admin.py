@@ -14,7 +14,9 @@ class PostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content')
 
 
-admin.site.register(models.Category)
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'describe')
 
 
 @admin.register(models.Profile)

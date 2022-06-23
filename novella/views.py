@@ -66,7 +66,7 @@ class ViewStory(View):
 
 
 class ViewProfile(generic.ListView):
-    model = Post, Profile
+    model = Post
     paginate_by = 7
     context_object_name = 'posts'
     template_name = 'story/profile_public.html'
@@ -74,6 +74,14 @@ class ViewProfile(generic.ListView):
     def get_queryset(self):
         author_id = self.kwargs['pk']
         return Post.objects.filter(author=author_id).order_by("-created_on")
+
+    def get_context_data(self, *args, **kwargs):
+        author_id = self.kwargs['pk']
+        queryset = Profile.objects.filter(id=author_id)
+        author = get_object_or_404(queryset)
+        context = super(ViewProfile, self).get_context_data(*args, **kwargs)
+        context["author"] = author
+        return context
 
 
 def CategoryView(request, category):
