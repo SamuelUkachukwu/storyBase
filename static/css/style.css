@@ -292,11 +292,14 @@ button,
 
 .avatar {
     width: 60%;
+    height: 60%;
+    border-radius: 5%;
+    background-color: var(--red-soft);
     margin: auto;
 }
 
 .avatar-img {
-    border-radius: 50%;
+    border-radius: 5%;
 }
 
 .profile-name {

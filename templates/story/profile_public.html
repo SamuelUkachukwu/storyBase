@@ -29,7 +29,7 @@
       <div class="profile">
         <div class="avatar">
           {% if "placeholder_img" in post.author.profile_image %}
-          <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;"
+          <img class="avatar-img img-fluid border border-3" style="object-fit: cover;"
             src="https://res.cloudinary.com/shybold/image/upload/v1655864027/logo2_haglwi.png" alt="profile image">
           {% else %}
           <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src="{{ author.profile_image.url }}"
