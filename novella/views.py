@@ -76,8 +76,8 @@ class ViewProfile(generic.ListView):
         return Post.objects.filter(author=author_id).order_by("-created_on")
 
     def get_context_data(self, *args, **kwargs):
-        author_id = self.kwargs['pk']
-        queryset = Profile.objects.filter(id=author_id)
+        user_id = self.kwargs['pk']
+        queryset = Profile.objects.filter(id=user_id)
         author = get_object_or_404(queryset)
         context = super(ViewProfile, self).get_context_data(*args, **kwargs)
         context["author"] = author

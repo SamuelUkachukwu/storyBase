@@ -4,6 +4,13 @@ from . import models
 
 
 # Register your models here.
+@admin.register(models.Profile)
+class UserProfile(admin.ModelAdmin):
+    list_display = ('user', 'bio', 'twitter')
+    list_filter = ('user',)
+    search_fields = ['user', 'post']
+
+    
 @admin.register(models.Post)
 class PostAdmin(SummernoteModelAdmin):
 
@@ -17,13 +24,6 @@ class PostAdmin(SummernoteModelAdmin):
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'describe')
-
-
-@admin.register(models.Profile)
-class UserProfile(admin.ModelAdmin):
-    list_display = ('user', 'bio')
-    list_filter = ('user',)
-    search_fields = ['user', 'post']
 
 
 @admin.register(models.Comment)

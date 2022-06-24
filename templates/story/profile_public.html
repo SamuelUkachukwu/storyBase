@@ -28,9 +28,8 @@
     <div class="col-md-4">
       <div class="profile">
         <div class="avatar">
-          {% if "placeholder_img" in post.author.profile_image %}
-          <img class="avatar-img img-fluid border border-3" style="object-fit: cover;"
-            src="https://res.cloudinary.com/shybold/image/upload/v1655864027/logo2_haglwi.png" alt="profile image">
+          {% if "placeholder_img" in author.profile_image.url %}
+          <img class="avatar-img img-fluid border border-3" style="object-fit: cover;" src="https://res.cloudinary.com/shybold/image/upload/v1656014926/31a5f800-0a92-47bf-82a9-77c89017f21b_zgidz8.png" alt="profile image">
           {% else %}
           <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src="{{ author.profile_image.url }}"
             alt="profile image">
@@ -44,9 +43,11 @@
       <div class="mb-3">
         <h1 class="bd-font fs-5">Bio:</h1>
         <p class="bio padding">{{ author.bio }}</p>
+        {% if author.twitter %}
         <div class=" bio mt-2 padding d-flex justify-content-center mb-5">
-          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="https://twitter.com/{{author.twitter}}"><i class="fab fa-twitter"></i></a>
         </div>
+        {% endif %}
       </div>
     </div>
 
