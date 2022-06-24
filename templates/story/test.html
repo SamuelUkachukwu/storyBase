@@ -1,0 +1,34 @@
+{% extends "story/base.html" %}
+{% block title %}storyBASE Category{% endblock %}
+
+{% block navcontent %}
+<ul class="nav">
+  {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+    </li>
+  {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+    </li>
+    <li class="nav-item call-to-atn">
+      <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
+    </li>
+  {% endif %}
+</ul>
+{% endblock %}
+{% block content %}
+hello
+{{ category }}
+
+
+{% if post_cat %}
+{% for post in post_cat %}
+<p>{{post.author}}</p>
+<p>{{ post.title }}</p>
+<p>{{ post.created_on}}</p>
+{% endfor %}
+{% else %}
+<p>the page has no published category</p>
+{% endif %}
+{% endblock %}

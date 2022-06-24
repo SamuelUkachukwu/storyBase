@@ -57,13 +57,17 @@
         <!--  -->
       <div class="collapse" id="collapseExample">
         {% if user.is_authenticated %}
-        <p>Leave a comment as: {{ user.username }}</p>
+        <p>Leave a comment as: <b>{{ user.username }}</b></p>
         <div class="card card-body">
           <form method="post" style="margin-top: 1.3em;">
             {{ comment_form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-signup btn-lg">Submit</button>
         </form>
+        </div>
+        {% else %}
+        <div class="card card-body">
+          <p>You need to be signed in to comment</p>
         </div>
         {% endif %}
       </div>
@@ -112,7 +116,7 @@
                 </div>
               </ul>
             </div>
-            
+
           </div>
         </div>
       </div>
