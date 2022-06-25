@@ -1,4 +1,4 @@
-{% extends "story/base.html" %}
+{% extends "fancy/base.html" %}
 
 {% load i18n %}
 
@@ -17,7 +17,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="mt-3 bd-font rounded-pill log-btn" type="submit">{% trans 'Sign Out' %}</button>
+        <button class="btn-100 mt-3 bd-font rounded-pill log-btn" type="submit">{% trans 'Sign Out' %}</button>
       </form>
     </div>
   </div>

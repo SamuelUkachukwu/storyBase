@@ -1,22 +1,7 @@
 {% extends "story/base.html" %}
 {% load crispy_forms_tags %}
 {% block title %}storyBASE {{ post.slug }}{% endblock %}
-{% block navcontent %}
-    <ul class="nav">
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-        </li>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-        </li>
-        <li class="nav-item call-to-atn">
-          <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
-        </li>
-      {% endif %}
-    </ul>
-{% endblock %}
+
 {% block content %}
 
 
@@ -27,8 +12,8 @@
         <div class="row display-box g-0">
           <div class="title-box">
             <div class="post-title">
-              <h1 class="fs-5 post-title"><span class=" bd-font">{{ post.title }}</span><br><span>By:
-                </span><span class="bd-font">{{ post.author }}</span></h1>
+              <a class="text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}"><h1 class="fs-5 post-title"><span class=" bd-font">{{ post.title }}</span><br><span>By:
+                </span><span class="bd-font">{{ post.author }}</span></h1></a>
                 <!-- <p>{{ post.author }}</p> -->
                 <!-- <p>{{ post.category.name }}</p> -->
             </div>
@@ -62,7 +47,7 @@
           <form method="post" style="margin-top: 1.3em;">
             {{ comment_form | crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+            <button type="submit" class="btn btn-signup btn-lg btn-100">Submit</button>
         </form>
         </div>
         {% else %}
@@ -71,7 +56,7 @@
         </div>
         {% endif %}
       </div>
-        <!--  -->
+        <!-- comments on post -->
         <hr>
         <div class="row">
           <div class="col-md-12 mt-2">
@@ -89,36 +74,57 @@
       <div class="col-md-4 author-info">
         <div class="side-info">
           <div class="user-card padding">
-            <div class="center mt-3 d-flex justify-content-center">
-              <div class="profile-pic-box">
-                <img class="profile-img" src="#" alt="user profile pic">
-              </div>
-            </div>
+{% if user.is_authenticated %}
+<div class="center mt-3 d-flex justify-content-center">
+  <div class="profile-pic-box">
+    <img class="profile-img" src="{{ user.profile.profile_image.url }}" alt="user profile pic">
+  </div>
+</div>
 
-            <div class="username padding d-flex justify-content-center">
-              <p class="text-style"> {{ post.author }}</p>
-            </div>
+<div class="d-flex justify-content-center">
+  <ul class="p-0">
+    <div class="padding text-center mt-3">
+      <li class="list-unstyled text-style bd-font">{{ user.username }}</li>
+    </div>
+    <div class="padding">
+      <li class="list-unstyled"><i class="fas fa-user"></i><a
+          class="padding text-decoration-none text-style" href="#">Profile</a></li>
+    </div>
+    <div class="padding">
+      <li class="list-unstyled"><i class="fas fa-file-alt"></i><a
+          class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
+    </div>
+    <hr>
+    <p>Other stories By:</p>
+    <div class="padding">
+      <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
+          class="padding text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}">
+          {{ post.author }}</a></li>
+    </div>
+  </ul>
+</div>
+</div>
+</div>
+{% else %}
+<div class="text-center">
+<div class="padding mt-4">
+  <p>Join our fast growing community of talented writers all over the world and let your creative spirit loose. </p>
+  <p class="mt-3">Did you enjoy <b>{{ post.author }}</b> story? Resgister or login to read more and comment on stories</p>
+  <div class="call-to-atn">
+    <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
+  </div>
 
-            <div class="d-flex justify-content-center">
-              <ul class="p-0">
-                <div class="padding">
-                  <li class="list-unstyled"><i class="fas fa-user"></i><a
-                      class="padding text-decoration-none text-style" href="#">Follow Author</a></li>
-                </div>
-                <div class="padding">
-                  <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
-                      class="padding text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}">
-                      {{ post.author }}</a></li>
-                </div>
-                <div class="padding">
-                  <li class="list-unstyled"><i class="fas fa-file-alt"></i><a
-                      class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
-                </div>
-              </ul>
-            </div>
+  <hr class="mt-4">
+</div>
 
-          </div>
-        </div>
+<div class="padding">
+  <p>View other stories by <a class="text-decoration-none text-style" href="{% url 'account_signup' %}"><b>{{ post.author }}</b></a></p>
+  <p class="mt-4"> Only on
+    <span class="logo1">story</span><span class="logo2">BASE </span><i class="fas fa-pen-alt"></i></p>
+</div>
+</div>
+{% endif %}
+
       </div>
     </div>
   </div>

@@ -279,7 +279,7 @@ article {
 
 /*-------------------------- profile page styling */
 
-button,
+.btn-100,
 .name-field {
     width: 100%;
 }

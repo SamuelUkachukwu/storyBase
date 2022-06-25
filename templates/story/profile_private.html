@@ -1,0 +1,19 @@
+{% extends "story/base.html" %}
+{% block title %}storyBASE Category{% endblock %}
+
+
+{% block content %}
+hello
+{{ category }}
+
+
+{% if post_cat %}
+{% for post in post_cat %}
+<p>{{post.author}}</p>
+<p>{{ post.title }}</p>
+<p>{{ post.created_on}}</p>
+{% endfor %}
+{% else %}
+<p>the page has no published category</p>
+{% endif %}
+{% endblock %}

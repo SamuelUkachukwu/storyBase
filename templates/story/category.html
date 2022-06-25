@@ -1,22 +1,7 @@
 {% extends "story/base.html" %}
 {% block title %}storyBASE Category{% endblock %}
 
-{% block navcontent %}
-<ul class="nav">
-  {% if user.is_authenticated %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-    </li>
-  {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-    </li>
-    <li class="nav-item call-to-atn">
-      <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
-    </li>
-  {% endif %}
-</ul>
-{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -39,7 +24,10 @@
   </div>
   {% endfor %}
 {% else %}
-<p>the page has no published category</p>
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 80vh;">
+  <p class="bd-font fs-3">the page has no published category</p>
+</div>
+
 {% endif %}
 </div>
 
