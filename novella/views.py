@@ -87,24 +87,6 @@ class ProfilePublic(generic.ListView):
         return context
 
 
-# class ViewProfilePrivate(generic.ListView):
-#     model = Post
-#     paginate_by = 7
-#     context_object_name = 'posts'
-#     template_name = 'story/profile_private.html'
-
-#     def get_queryset(self):
-#         user_id = self.kwargs['pk']
-#         return Post.objects.filter(author=user_id).order_by("-created_on")
-
-#     def get_context_data(self, *args, **kwargs):
-#         user_id = self.kwargs['pk']
-#         queryset = Profile.objects.filter(id=user_id)
-#         author = get_object_or_404(queryset)
-#         context = super(ViewProfilePrivate, self).get_context_data(*args, **kwargs)
-#         context["user"] = user
-#         return context
-
 class ProfilePrivate(View):
 
     def get(self, request, *args, **kwargs):

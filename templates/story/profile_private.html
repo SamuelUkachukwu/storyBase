@@ -40,15 +40,20 @@
 
             <!--------------collapsable -->
             <div class="collapse" id="collapseExample">
+                <form action="profile" method="post">
+                    {% csrf_token %}
                 <div class="card card-body mb-5">
 
-                    <label class="bd-font" for="bio">Bio:</label>
-                    <textarea class="padding" name="bio" id="bio" cols="30" rows="4" placeholder="About Me..."></textarea>
+                        <label class="bd-font" for="bio">Bio:</label>
+                        <textarea class="padding" name="bio" id="bio" cols="30" rows="4"
+                            placeholder="About Me..."></textarea>
 
-                    <label for="twitter"><i class="fab fa-twitter padding"></i></label>
-                    <input class="edt-input padding" type="text" name="twitter" placeholder="twiter username">
-                    <button class="bd-font mt-2 btn btn-success" type="submit">Save</button>
+                        <label for="twitter"><i class="fab fa-twitter padding"></i></label>
+                        <input class="edt-input padding" type="text" name="twitter" placeholder="twiter username">
+                        <button class="bd-font mt-2 btn btn-success" type="submit">Save</button>
+
                 </div>
+            </form>
             </div>
         </div>
 
