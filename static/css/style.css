@@ -34,6 +34,9 @@ p {
 }
 
 /* -----------------------navbar styling */
+.nav{
+    margin-right: 15px;
+}
 .navbar {
     background-color: var(--dark-blue);
 }
@@ -271,7 +274,7 @@ article {
     border-radius: 100%;
 }
 
-.text-style {
+.text-style, .offcanvas-theme {
     color: var(--white);
     font-weight: bold;
     letter-spacing: 1.2px;
@@ -304,7 +307,7 @@ article {
 
 .profile-name {
     font-family: 'Roboto', sans-serif;
-    font-size: clamp(15px, 8vw, 20px);
+    font-size: clamp(20px, 8vw, 26px);
     font-weight: bold;
 }
 

@@ -1,19 +1,89 @@
 {% extends "story/base.html" %}
-{% block title %}storyBASE Category{% endblock %}
-
+{% block title %}storyBASE profile {{ profile.user }}{% endblock %}
 
 {% block content %}
-hello
-{{ category }}
+
+<!---------------------- tmplate this section below--- -->
+
+<div class="container-md">
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="profile">
+                <div class="avatar">
+                    {% if "placeholder_img" in profile.profile_image.url %}
+                    <img class="avatar-img img-fluid border border-3" style="object-fit: cover;"
+                        src="https://res.cloudinary.com/shybold/image/upload/v1656014926/31a5f800-0a92-47bf-82a9-77c89017f21b_zgidz8.png"
+                        alt="profile image">
+                    {% else %}
+                    <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;"
+                        src="{{ profile.profile_image.url }}" alt="profile image">
+                    {% endif %}
+
+                </div>
+                <div class="name-field padding d-flex align-items-center justify-content-center">
+                    <h1 class="profile-name mt-3">{{profile.user}}</h1>
+                </div>
+            </div>
+            <div class="mb-3">
+                <h1 class="bd-font fs-5">Bio:</h1>
+                <p class="bio padding">{{profile.bio}}</p>
+                {% if profile.twitter %}
+                <div class=" bio mt-2 padding d-flex justify-content-center mb-5">
+                    <a href="https://twitter.com/{{profile.twitter}}"><i class="fab fa-twitter"></i></a>
+                </div>
+                {% endif %}
+            </div>
+            <!-- edit profile -->
+            <button id="edit-btn" class="p-1 mb-3 rounded-pill bd-font btn-100" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">EDIT
+                PROFILE</button>
+
+            <!--------------collapsable -->
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body mb-5">
+
+                    <label class="bd-font" for="bio">Bio:</label>
+                    <textarea class="padding" name="bio" id="bio" cols="30" rows="4" placeholder="About Me..."></textarea>
+
+                    <label for="twitter"><i class="fab fa-twitter padding"></i></label>
+                    <input class="edt-input padding" type="text" name="twitter" placeholder="twiter username">
+                    <button class="bd-font mt-2 btn btn-success" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- stories submited by author -->
+        <div class="col-md-8">
+            <!--  -->
+
+            {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title bd-font">{{ post.title }}</h5>
+                    <p class="card-text"> {{ post.excerpt }}</p>
+                    <div class="padding">
+                        <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i
+                                class="fab fa-readme"></i>...READ STORY</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="card mb-5 bg-success bg-opacity-50">
+                <div class="card-body d-flex justify-content-evenly">
+                    <p>Avid Reader? Join <span class="logo1">story</span><span class="logo2">BASE </span><i
+                            class="fas fa-pen-alt"></i></p>
+                    <a class="text-style" href="https://twitter.com/" target="_blank"
+                        aria-label="visit our twitter page"><i class="fab fa-twitter"></i></a>
+                    <a class="text-style" href="https://www.facebook.com/" target="_blank"
+                        aria-label="visit our twitter page"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
 
 
-{% if post_cat %}
-{% for post in post_cat %}
-<p>{{post.author}}</p>
-<p>{{ post.title }}</p>
-<p>{{ post.created_on}}</p>
-{% endfor %}
-{% else %}
-<p>the page has no published category</p>
-{% endif %}
+            <!--  -->
+        </div>
+    </div>
+</div>
+
 {% endblock %}

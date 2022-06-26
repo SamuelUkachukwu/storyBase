@@ -65,7 +65,10 @@ class ViewStory(View):
         )
 
 
-class ViewProfile(generic.ListView):
+class ProfilePublic(generic.ListView):
+    """View for the profiles of authors of posts.
+    this can be viewd by clicking on post title and author headings
+    login is required"""
     model = Post
     paginate_by = 7
     context_object_name = 'posts'
@@ -73,15 +76,47 @@ class ViewProfile(generic.ListView):
 
     def get_queryset(self):
         author_id = self.kwargs['pk']
-        return Post.objects.filter(author=author_id).order_by("-created_on")
+        return Post.objects.filter(author=author_id, status=1).order_by("-created_on")
 
     def get_context_data(self, *args, **kwargs):
         user_id = self.kwargs['pk']
         queryset = Profile.objects.filter(id=user_id)
         author = get_object_or_404(queryset)
-        context = super(ViewProfile, self).get_context_data(*args, **kwargs)
+        context = super(ProfilePublic, self).get_context_data(*args, **kwargs)
         context["author"] = author
         return context
+
+
+# class ViewProfilePrivate(generic.ListView):
+#     model = Post
+#     paginate_by = 7
+#     context_object_name = 'posts'
+#     template_name = 'story/profile_private.html'
+
+#     def get_queryset(self):
+#         user_id = self.kwargs['pk']
+#         return Post.objects.filter(author=user_id).order_by("-created_on")
+
+#     def get_context_data(self, *args, **kwargs):
+#         user_id = self.kwargs['pk']
+#         queryset = Profile.objects.filter(id=user_id)
+#         author = get_object_or_404(queryset)
+#         context = super(ViewProfilePrivate, self).get_context_data(*args, **kwargs)
+#         context["user"] = user
+#         return context
+
+class ProfilePrivate(View):
+
+    def get(self, request, *args, **kwargs):
+        user_id = self.kwargs['id']
+        queryset = Profile.objects.filter(id=user_id)
+        profile = get_object_or_404(queryset)
+        posts = Post.objects.filter(author=user_id)
+
+        return render(request, 'story/profile_private.html', {
+            "profile": profile,
+            "posts": posts
+        })
 
 
 def CategoryView(request, category):

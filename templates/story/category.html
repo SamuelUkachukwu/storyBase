@@ -14,7 +14,7 @@
         <div class="card-body">
           <h5 class="card-title bd-font">{{ post.title }}</h5>
             <p class="card-text"> {{ post.excerpt }}</p>
-            <div class="d-flex justify-content-around text-muted">
+            <div class="d-flex justify-content-around text-muted mt-3">
               <p>Published By <b class="text-dark bd-font">{{ post.author }}</b> | {{ post.created_on }}</p>
               <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i class="fab fa-readme"></i>...READ STORY</a>
             </div>
