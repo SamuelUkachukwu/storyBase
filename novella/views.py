@@ -101,6 +101,11 @@ class ProfilePrivate(View):
         })
 
 
+def UpdateProfile(request, user_id):
+    profile = Profile.objects.get(user=user_id)
+    return render(request, 'story/update_profile.html', {'profile': profile})
+
+
 def CategoryView(request, category):
     post_cat = Post.objects.filter(category=category)
     return render(request, 'story/category.html', {'category': category, 'post_cat': post_cat})

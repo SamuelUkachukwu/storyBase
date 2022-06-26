@@ -1,0 +1,10 @@
+{% extends "story/base.html" %}
+{% block title %}storyBASE profile {{ profile.user }}{% endblock %}
+
+{% block content %}
+<h1>Hello</h1>
+<form action="">
+    {% csrf_token %}
+    {{user}}
+</form>
+{% endblock %}

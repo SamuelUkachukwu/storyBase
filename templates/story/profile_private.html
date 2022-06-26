@@ -33,42 +33,43 @@
                 </div>
                 {% endif %}
             </div>
-            <!-- edit profile -->
-            <button id="edit-btn" class="p-1 mb-3 rounded-pill bd-font btn-100" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">EDIT
-                PROFILE</button>
 
-            <!--------------collapsable -->
-            <div class="collapse" id="collapseExample">
-                <form action="profile" method="post">
-                    {% csrf_token %}
-                <div class="card card-body mb-5">
-
-                        <label class="bd-font" for="bio">Bio:</label>
-                        <textarea class="padding" name="bio" id="bio" cols="30" rows="4"
-                            placeholder="About Me..."></textarea>
-
-                        <label for="twitter"><i class="fab fa-twitter padding"></i></label>
-                        <input class="edt-input padding" type="text" name="twitter" placeholder="twiter username">
-                        <button class="bd-font mt-2 btn btn-success" type="submit">Save</button>
-
-                </div>
-            </form>
-            </div>
         </div>
 
         <!-- stories submited by author -->
         <div class="col-md-8">
             <!--  -->
+            <div class="mb-3">
+                <a class="text-decoration-none bd-font" href="{% url 'update_profile' profile.user_id %}">Edit Profile</a> |
+                <a class="text-decoration-none bd-font" href="">Submit New Story</a> |
+            </div>
 
             {% for post in posts %}
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title bd-font">{{ post.title }}</h5>
+                    <div class="d-flex">
+                        <h5 class="card-title bd-font">{{ post.title }} |
+                            <span class="text-muted fs-6">{% if post.status == 1%}
+                            Published
+                            {% else %}
+                            Draft
+                            {% endif %}</span>
+                        </h5>
+                    </div>
+
                     <p class="card-text"> {{ post.excerpt }}</p>
-                    <div class="padding">
-                        <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i
-                                class="fab fa-readme"></i>...READ STORY</a>
+                    <div class="d-flex">
+                        <div class="padding">
+                            <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i
+                                    class="fab fa-readme"></i>...READ STORY</a>
+                        </div>
+                        <div class="padding">
+                            <a class="text-decoration-none bd-font" href="">Edit</a>
+                        </div>
+                        <div class="padding">
+                            <a class="text-decoration-none bd-font" href="">Delete</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

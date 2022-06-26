@@ -1,12 +1,16 @@
 from django import forms
-from crispy_forms.helper import FormHelper
-from .models import Comment
+from .models import Comment, Profile
 
 
 class CommentForm(forms.ModelForm):
-    helper = FormHelper()
-    helper.form_show_label = False
 
     class Meta:
         model = Comment
         fields = ('body',)
+
+
+class UpdateProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('user', 'profile_image', 'bio', 'twitter')
