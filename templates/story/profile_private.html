@@ -28,8 +28,8 @@
                 <h1 class="bd-font fs-5">Bio:</h1>
                 <p class="bio padding">{{profile.bio}}</p>
                 {% if profile.twitter %}
-                <div class=" bio mt-2 padding d-flex justify-content-center mb-5">
-                    <a href="https://twitter.com/{{profile.twitter}}"><i class="fab fa-twitter"></i></a>
+                <div class=" bio mt-2 padding d-flex justify-content-center mb-5 d-block">
+                    <a  href="https://twitter.com/{{profile.twitter}}" target="_blank" aria-label="users twitter page"><i class="fab fa-twitter"></i></a>
                 </div>
                 {% endif %}
             </div>
@@ -49,10 +49,11 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <h5 class="card-title bd-font">{{ post.title }} |
-                            <span class="text-muted fs-6">{% if post.status == 1%}
-                            Published
+                            <span class="text-muted fs-6">
+                            {% if post.status == 1%}
+                                Published
                             {% else %}
-                            Draft
+                                Draft
                             {% endif %}</span>
                         </h5>
                     </div>

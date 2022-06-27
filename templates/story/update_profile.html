@@ -2,9 +2,16 @@
 {% block title %}storyBASE profile {{ profile.user }}{% endblock %}
 
 {% block content %}
-<h1>Hello</h1>
-<form action="">
-    {% csrf_token %}
-    {{user}}
-</form>
+
+<div class="container">
+    {% load cloudinary %}
+
+    <form  action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+       {{ form.as_p }}
+       <button class="btn btn-secondary">Submit</button>
+    </form>
+
+</div>
+
 {% endblock %}

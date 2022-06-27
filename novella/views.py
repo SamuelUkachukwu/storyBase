@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
+from cloudinary.forms import cl_init_js_callbacks
 from .models import Post, Category, Profile
-from .forms import CommentForm
+from .forms import CommentForm, UpdateProfileForm
 from django.urls import reverse
 
 
@@ -101,9 +102,30 @@ class ProfilePrivate(View):
         })
 
 
+# def UpdateProfile(request, user_id):
+#     submitted = False
+#     profile = Profile.objects.get(user=user_id)
+
+#     if request.method == 'POST':
+#         form = UpdateProfileForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile?submitted=True')
+#     else:
+#         form = UpdateProfileForm
+#         if 'submitted' in request.GET:
+#             submitted = True
+#     return render(request, 'story/update_profile.html', {'profile': profile, 'form': form, 'submitted': submitted})
+
+
 def UpdateProfile(request, user_id):
-    profile = Profile.objects.get(user=user_id)
-    return render(request, 'story/update_profile.html', {'profile': profile})
+    # user_id = id
+    profile = Profile.objects.get(id=user_id)
+    form = UpdateProfileForm(request.POST or None,  instance=profile)
+    if form.is_valid():
+        form.save()
+        return redirect('profile', id=user_id)
+    return render(request, 'story/update_profile.html', {'profile': profile, 'form': form})
 
 
 def CategoryView(request, category):

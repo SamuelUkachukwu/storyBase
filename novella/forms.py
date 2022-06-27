@@ -13,4 +13,6 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('user', 'profile_image', 'bio', 'twitter')
+        fields = '__all__'
+
+# ('profile_image', 'bio', 'twitter')
