@@ -34,9 +34,10 @@ p {
 }
 
 /* -----------------------navbar styling */
-.nav{
+.nav {
     margin-right: 15px;
 }
+
 .navbar {
     background-color: var(--dark-blue);
 }
@@ -164,7 +165,7 @@ article {
 }
 
 .post-title:hover {
-    color:var(--dark-blue);
+    color: var(--dark-blue);
 }
 
 .post-title {
@@ -274,7 +275,8 @@ article {
     border-radius: 100%;
 }
 
-.text-style, .offcanvas-theme {
+.text-style,
+.offcanvas-theme {
     color: var(--white);
     font-weight: bold;
     letter-spacing: 1.2px;
@@ -299,6 +301,7 @@ article {
     border-radius: 5%;
     background-color: var(--red-soft);
     margin: auto;
+
 }
 
 .avatar-img {
@@ -310,6 +313,7 @@ article {
     font-size: clamp(20px, 8vw, 26px);
     font-weight: bold;
 }
+
 
 #edit-btn {
     transition: 1s;
@@ -350,9 +354,10 @@ article {
     .author-info {
         display: none;
     }
+
     .title-box {
         max-width: 90%;
-        left:5%;
+        left: 5%;
     }
 }
 

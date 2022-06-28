@@ -2,13 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from cloudinary.forms import cl_init_js_callbacks
 from .models import Post, Category, Profile
-from .forms import CommentForm, UpdateProfileForm
-from django.urls import reverse
+from .forms import CommentForm, UpdateProfileForm, AddPostForm
 
 
 # Create your views here.
-# def home(request):
-#     return render(request, 'index.html')
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by("-created_on")
@@ -68,7 +65,7 @@ class ViewStory(View):
 
 class ProfilePublic(generic.ListView):
     """View for the profiles of authors of posts.
-    this can be viewd by clicking on post title and author headings
+    this can be viewed by clicking on post title and author headings
     login is required"""
     model = Post
     paginate_by = 7
@@ -88,43 +85,20 @@ class ProfilePublic(generic.ListView):
         return context
 
 
-class ProfilePrivate(View):
-
-    def get(self, request, *args, **kwargs):
-        user_id = self.kwargs['id']
-        queryset = Profile.objects.filter(id=user_id)
-        profile = get_object_or_404(queryset)
-        posts = Post.objects.filter(author=user_id)
-
-        return render(request, 'story/profile_private.html', {
-            "profile": profile,
-            "posts": posts
-        })
+def ProfilePrivate(request):
+    author = request.user
+    context = Post.objects.filter(author=author)
+    return render(request, 'story/profile_private.html', {'posts': context})
 
 
-# def UpdateProfile(request, user_id):
-#     submitted = False
-#     profile = Profile.objects.get(user=user_id)
+def UpdateProfile(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
 
-#     if request.method == 'POST':
-#         form = UpdateProfileForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('profile?submitted=True')
-#     else:
-#         form = UpdateProfileForm
-#         if 'submitted' in request.GET:
-#             submitted = True
-#     return render(request, 'story/update_profile.html', {'profile': profile, 'form': form, 'submitted': submitted})
-
-
-def UpdateProfile(request, user_id):
-    # user_id = id
-    profile = Profile.objects.get(id=user_id)
     form = UpdateProfileForm(request.POST or None,  instance=profile)
     if form.is_valid():
         form.save()
-        return redirect('profile', id=user_id)
+        return redirect('profile')
     return render(request, 'story/update_profile.html', {'profile': profile, 'form': form})
 
 
@@ -133,16 +107,14 @@ def CategoryView(request, category):
     return render(request, 'story/category.html', {'category': category, 'post_cat': post_cat})
 
 
-class AddArticle(generic.CreateView):
-    model = Post
-    template_name = 'story/add_post.html'
-    fields = [
-        'title',
-        'slug',
-        'author',
-        'category',
-        'content',
-        'featured_image',
-        'excerpt',
-        'status'
-        ]
+def AddPost(request):
+
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AddPostForm()
+
+    return render(request, 'story/add_post.html', {'form': form})

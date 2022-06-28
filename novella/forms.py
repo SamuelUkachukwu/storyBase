@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Profile
+from .models import Comment, Profile, Post
 
 
 class CommentForm(forms.ModelForm):
@@ -16,3 +16,19 @@ class UpdateProfileForm(forms.ModelForm):
         fields = '__all__'
 
 # ('profile_image', 'bio', 'twitter')
+
+
+class AddPostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = (
+            'title',
+            'slug',
+            'author',
+            'category',
+            'content',
+            'featured_image',
+            'excerpt',
+            'status'
+        )

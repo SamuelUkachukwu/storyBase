@@ -23,7 +23,7 @@ class Post(models.Model):
     title = models.CharField(max_length=30, unique=True)
     slug = models.SlugField(max_length=30, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='story_post')
+        User, on_delete=models.CASCADE)
     updated_on = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='post')

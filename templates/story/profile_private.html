@@ -16,7 +16,7 @@
                         alt="profile image">
                     {% else %}
                     <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;"
-                        src="{{ profile.profile_image.url }}" alt="profile image">
+                        src="{{ user.profile.profile_image.url }}" alt="profile image">
                     {% endif %}
 
                 </div>
@@ -26,10 +26,10 @@
             </div>
             <div class="mb-3">
                 <h1 class="bd-font fs-5">Bio:</h1>
-                <p class="bio padding">{{profile.bio}}</p>
-                {% if profile.twitter %}
+                <p class="bio padding">{{ user.profile.bio }}</p>
+                {% if user.profile.twitter %}
                 <div class=" bio mt-2 padding d-flex justify-content-center mb-5 d-block">
-                    <a  href="https://twitter.com/{{profile.twitter}}" target="_blank" aria-label="users twitter page"><i class="fab fa-twitter"></i></a>
+                    <a  href="https://twitter.com/{{user.profile.twitter}}" target="_blank" aria-label="users twitter page"><i class="fab fa-twitter"></i></a>
                 </div>
                 {% endif %}
             </div>
@@ -40,8 +40,9 @@
         <div class="col-md-8">
             <!--  -->
             <div class="mb-3">
-                <a class="text-decoration-none bd-font" href="{% url 'update_profile' profile.user_id %}">Edit Profile</a> |
-                <a class="text-decoration-none bd-font" href="">Submit New Story</a> |
+                <a class="text-decoration-none bd-font" href="{% url 'update_profile' %}">Edit Profile</a> |
+                <a class="text-decoration-none bd-font" href="{% url 'add_story' %}">Submit New Story</a> |
+
             </div>
 
             {% for post in posts %}
