@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 
 
@@ -47,7 +48,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
-        #  return reverse('view_post', args=(str(self.id))) try this
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def number_of_likes(self):
         return self.likes.count()

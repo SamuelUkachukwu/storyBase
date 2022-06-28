@@ -66,14 +66,28 @@
                                     class="fab fa-readme"></i>...READ STORY</a>
                         </div>
                         <div class="padding">
-                            <a class="text-decoration-none bd-font" href="">Edit</a>
+                            <a class="text-decoration-none bd-font" href="{% url 'edit_story' post.slug %}">Edit</a>
                         </div>
                         <div class="padding">
-                            <a class="text-decoration-none bd-font" href="">Delete</a>
+                            <a class="text-decoration-none bd-font" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="">Delete</a>
                         </div>
-
                     </div>
                 </div>
+                <!----delete modal---->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>Are You Sure You Want To Delete This Post?</p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="{% url 'delete' post.slug %}" type="button" class="btn btn-primary">Delete</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- end here modal -->
             </div>
             {% endfor %}
 

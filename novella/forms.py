@@ -13,7 +13,7 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ('bio', 'profile_image', 'twitter')
 
 # ('profile_image', 'bio', 'twitter')
 
@@ -24,7 +24,6 @@ class AddPostForm(forms.ModelForm):
         model = Post
         fields = (
             'title',
-            'slug',
             'author',
             'category',
             'content',
@@ -32,3 +31,4 @@ class AddPostForm(forms.ModelForm):
             'excerpt',
             'status'
         )
+        widgets = {'author': forms.HiddenInput()}

@@ -13,7 +13,7 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "story/index.html"
     context_object_name = 'posts'
-    paginate_by = 10
+    paginate_by = 20
 
     def get_context_data(self, *args, **kwargs):
         cat_list = Category.objects.all()
@@ -73,7 +73,7 @@ class ProfilePublic(generic.ListView):
     this can be viewed by clicking on post title and author headings
     login is required"""
     model = Post
-    paginate_by = 7
+    paginate_by = 10
     context_object_name = 'posts'
     template_name = 'story/profile_public.html'
 
@@ -132,3 +132,22 @@ def add_post(request):
         form = AddPostForm()
 
     return render(request, 'story/add_post.html', {'form': form})
+
+
+def edit_post(request, slug):
+    """This function edit's a post"""
+    post = Post.objects.get(slug=slug)
+    print('THIS IS THE QUERYSET:', post)
+
+    form = AddPostForm(request.POST or None, instance=post)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    return render(request, 'story/edit_post.html', {'post': post, 'form': form})
+
+
+def delete_post(request, slug):
+    """This function deletes a selected post"""
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    return redirect('profile')
