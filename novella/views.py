@@ -7,6 +7,8 @@ from .forms import CommentForm, UpdateProfileForm, AddPostForm
 
 # Create your views here.
 class PostList(generic.ListView):
+    """This generic based view list of all published post
+    it also list out all categories"""
     model = Post
     queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "story/index.html"
@@ -21,6 +23,9 @@ class PostList(generic.ListView):
 
 
 class ViewStory(View):
+    """This View takes users to a detail view of selected post
+    it also allows reader to make comment is logged in
+    and read other users comments"""
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
@@ -85,13 +90,17 @@ class ProfilePublic(generic.ListView):
         return context
 
 
-def ProfilePrivate(request):
+def profile_private(request):
+    """ This function take the logged in user to their profile page
+    where they can edit their profile add new post and delete post"""
     author = request.user
     context = Post.objects.filter(author=author)
     return render(request, 'story/profile_private.html', {'posts': context})
 
 
-def UpdateProfile(request):
+def update_profile(request):
+    """This function allows the user to edit their profile"""
+
     user = request.user
     profile = Profile.objects.get(user=user)
 
@@ -102,12 +111,17 @@ def UpdateProfile(request):
     return render(request, 'story/update_profile.html', {'profile': profile, 'form': form})
 
 
-def CategoryView(request, category):
+def category_view(request, category):
+    """This takes the site user to a category template
+    where they can view post sorted in categories"""
+
     post_cat = Post.objects.filter(category=category)
     return render(request, 'story/category.html', {'category': category, 'post_cat': post_cat})
 
 
-def AddPost(request):
+def add_post(request):
+    """This function allows users to add new post
+    redirects user to thier profile page"""
 
     if request.method == 'POST':
         form = AddPostForm(request.POST)
