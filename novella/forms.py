@@ -1,4 +1,5 @@
 from django import forms
+from django_summernote.widgets import SummernoteWidget
 from .models import Comment, Profile, Post
 
 
@@ -28,7 +29,14 @@ class AddPostForm(forms.ModelForm):
             'category',
             'content',
             'featured_image',
-            'excerpt',
-            'status'
+            'status',
+            'excerpt'
+
         )
-        widgets = {'author': forms.HiddenInput()}
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'author': forms.TextInput(attrs={'class': 'form-control', 'id': 'username', 'value': '', 'type': 'hidden'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'content': SummernoteWidget(),
+            'excerpt': forms.Textarea(attrs={'class': 'form-control', "rows": 2, "cols": 20, 'placeholder': 'Sumary of Post Here'})
+        }
