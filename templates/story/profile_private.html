@@ -61,6 +61,7 @@
 
                     <p class="card-text"> {{ post.excerpt }}</p>
                     <div class="d-flex">
+                        {% if post.status == 1%}
                         <div class="padding">
                             <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i
                                     class="fab fa-readme"></i>...READ STORY</a>
@@ -68,6 +69,13 @@
                         <div class="padding">
                             <a class="text-decoration-none bd-font" href="{% url 'edit_story' post.slug %}">Edit</a>
                         </div>
+                        {% else %}
+                        <div class="padding">
+                            <a class="text-decoration-none bd-font" href="{% url 'edit_story' post.slug %}"><i class="fas fa-edit"></i>...Edit</a>
+                        </div>
+                        {% endif %}</span>
+
+
                         <div class="padding">
                             <a class="text-decoration-none bd-font" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="">Delete</a>
                         </div>
