@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
+
 from cloudinary.forms import cl_init_js_callbacks
 from .models import Post, Category, Profile
 from .forms import CommentForm, UpdateProfileForm, AddPostForm
@@ -7,7 +8,7 @@ from .forms import CommentForm, UpdateProfileForm, AddPostForm
 
 # Create your views here.
 class PostList(generic.ListView):
-    """This generic based view list of all published post
+    """This generic based view, list all published post
     it also list out all categories"""
     model = Post
     queryset = Post.objects.filter(status=1).order_by("-created_on")
@@ -98,13 +99,25 @@ def profile_private(request):
     return render(request, 'story/profile_private.html', {'posts': context})
 
 
+# def update_profile(request):
+#     """This function allows the user to edit their profile"""
+
+#     user = request.user
+#     profile = Profile.objects.get(user=user)
+
+#     form = UpdateProfileForm(request.POST or None,  instance=profile)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('profile')
+#     return render(request, 'story/update_profile.html', {'profile': profile, 'form': form})
+
 def update_profile(request):
     """This function allows the user to edit their profile"""
 
     user = request.user
     profile = Profile.objects.get(user=user)
 
-    form = UpdateProfileForm(request.POST or None,  instance=profile)
+    form = UpdateProfileForm(request.POST or None, request.FILES, instance=profile)
     if form.is_valid():
         form.save()
         return redirect('profile')
@@ -119,19 +132,33 @@ def category_view(request, category):
     return render(request, 'story/category.html', {'category': category, 'post_cat': post_cat})
 
 
-def add_post(request):
-    """This function allows users to add new post
-    redirects user to thier profile page"""
+# def add_post(request):
+#     """This function allows users to add new post
+#     redirects user to thier profile page"""
 
+#     if request.method == 'POST':
+#         form = AddPostForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')
+#     else:
+#         form = AddPostForm()
+
+#     return render(request, 'story/add_post.html', {'form': form})
+
+
+def add_post(request):
+    context = dict(backend_form=AddPostForm())
     if request.method == 'POST':
-        form = AddPostForm(request.POST)
+        form = AddPostForm(request.POST, request.FILES)
+        context['posted'] = form.instance
         if form.is_valid():
             form.save()
             return redirect('profile')
     else:
         form = AddPostForm()
 
-    return render(request, 'story/add_post.html', {'form': form})
+    return render(request, 'story/add_post.html', context)
 
 
 def edit_post(request, slug):
