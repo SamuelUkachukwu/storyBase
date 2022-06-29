@@ -7,7 +7,7 @@
 <br><br>
 <div class="container bg-light padding">
 
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <br>
@@ -15,7 +15,10 @@
             <button type="submit" class="btn btn-success btn-100 padding bd-font">Submit</button>
         </div>
     </form>
-
 </div>
 
+<script>
+    let name = "{{ user.id }}";
+    document.getElementById('username').value = name;
+</script>
 {% endblock %}

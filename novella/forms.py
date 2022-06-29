@@ -14,14 +14,26 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('bio', 'profile_image', 'twitter')
+        fields = ('user', 'bio', 'profile_image', 'twitter')
 
         widgets = {
-            'bio': forms.Textarea(attrs={'class': 'form-control', "rows": 3, "cols": 20, 'placeholder': 'Tell Your Readers a Little About Yourself'}),
-            'twitter': forms.TextInput(attrs={'class': 'form-control',  'placeholder': 'Twitter Username Here'}),
+            'user': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'username',
+                'value': '',
+                'type': 'hidden'
+                }),
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control',
+                "rows": 3,
+                "cols": 20,
+                'placeholder': 'Tell Your Readers a Little About Yourself'
+                }),
+            'twitter': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Twitter Username Here'
+                }),
         }
-
-# ('profile_image', 'bio', 'twitter')
 
 
 class AddPostForm(forms.ModelForm):
@@ -40,8 +52,18 @@ class AddPostForm(forms.ModelForm):
         )
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'author': forms.TextInput(attrs={'class': 'form-control', 'id': 'username', 'value': '', 'type': 'hidden'}),
+            'author': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'username',
+                'value': '',
+                'type': 'hidden'
+                }),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'content': SummernoteWidget(),
-            'excerpt': forms.Textarea(attrs={'class': 'form-control', "rows": 2, "cols": 20, 'placeholder': 'Sumary of Post Here'})
+            'excerpt': forms.Textarea(attrs={
+                'class': 'form-control padding',
+                "rows": 2,
+                "cols": 20,
+                'placeholder': 'Sumary of Post Here'
+                })
         }

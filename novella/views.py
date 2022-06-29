@@ -80,7 +80,9 @@ class ProfilePublic(generic.ListView):
 
     def get_queryset(self):
         author_id = self.kwargs['pk']
-        return Post.objects.filter(author=author_id, status=1).order_by("-created_on")
+        return Post.objects.filter(author=author_id, status=1).order_by(
+            "-created_on"
+            )
 
     def get_context_data(self, *args, **kwargs):
         user_id = self.kwargs['pk']
@@ -99,29 +101,24 @@ def profile_private(request):
     return render(request, 'story/profile_private.html', {'posts': context})
 
 
-# def update_profile(request):
-#     """This function allows the user to edit their profile"""
-
-#     user = request.user
-#     profile = Profile.objects.get(user=user)
-
-#     form = UpdateProfileForm(request.POST or None,  instance=profile)
-#     if form.is_valid():
-#         form.save()
-#         return redirect('profile')
-#     return render(request, 'story/update_profile.html', {'profile': profile, 'form': form})
-
 def update_profile(request):
     """This function allows the user to edit their profile"""
 
     user = request.user
     profile = Profile.objects.get(user=user)
 
-    form = UpdateProfileForm(request.POST or None, request.FILES, instance=profile)
+    form = UpdateProfileForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=profile
+        )
     if form.is_valid():
         form.save()
         return redirect('profile')
-    return render(request, 'story/update_profile.html', {'profile': profile, 'form': form})
+    return render(request, 'story/update_profile.html', {
+        'profile': profile,
+        'form': form
+        })
 
 
 def category_view(request, category):
@@ -129,22 +126,10 @@ def category_view(request, category):
     where they can view post sorted in categories"""
 
     post_cat = Post.objects.filter(category=category)
-    return render(request, 'story/category.html', {'category': category, 'post_cat': post_cat})
-
-
-# def add_post(request):
-#     """This function allows users to add new post
-#     redirects user to thier profile page"""
-
-#     if request.method == 'POST':
-#         form = AddPostForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('profile')
-#     else:
-#         form = AddPostForm()
-
-#     return render(request, 'story/add_post.html', {'form': form})
+    return render(request, 'story/category.html', {
+        'category': category,
+        'post_cat': post_cat
+        })
 
 
 def add_post(request):
@@ -164,13 +149,19 @@ def add_post(request):
 def edit_post(request, slug):
     """This function edit's a post"""
     post = Post.objects.get(slug=slug)
-    print('THIS IS THE QUERYSET:', post)
 
-    form = AddPostForm(request.POST or None, instance=post)
+    form = AddPostForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=post
+        )
     if form.is_valid():
         form.save()
         return redirect('profile')
-    return render(request, 'story/edit_post.html', {'post': post, 'form': form})
+    return render(request, 'story/edit_post.html', {
+        'post': post,
+        'form': form
+        })
 
 
 def delete_post(request, slug):
