@@ -16,6 +16,11 @@ class UpdateProfileForm(forms.ModelForm):
         model = Profile
         fields = ('bio', 'profile_image', 'twitter')
 
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control', "rows": 3, "cols": 20, 'placeholder': 'Tell Your Readers a Little About Yourself'}),
+            'twitter': forms.TextInput(attrs={'class': 'form-control',  'placeholder': 'Twitter Username Here'}),
+        }
+
 # ('profile_image', 'bio', 'twitter')
 
 

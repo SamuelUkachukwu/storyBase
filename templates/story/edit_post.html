@@ -5,12 +5,15 @@
 
         <div class="container bg-light">
             <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <h1>Edit Story</h1>
+                <div class="col-md-10 padding">
+                    <h1 class="bd-font">Edit Story...<i class="fas fa-edit"></i></h1>
                     <form action="" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <br>
+                        <div class="pb-3">
+                            <button type="submit" class="btn btn-success btn-100 padding bd-font">Submit</button>
+                        </div>
                 </div>
             </div>
         </div>
