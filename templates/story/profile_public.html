@@ -47,7 +47,8 @@
         {% for post in posts %}
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title bd-font">{{ post.title }}</h5>
+            <h5 class="card-title bd-font">{{ post.title }} | <span class="text-muted fs-6">{{ post.category }}</span></h5>
+
             <p class="card-text"> {{ post.excerpt }}</p>
             <div class="padding">
               <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i class="fab fa-readme"></i>...READ STORY</a>
