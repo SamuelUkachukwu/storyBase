@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic, View
+from django.http import HttpResponseRedirect
 
-from cloudinary.forms import cl_init_js_callbacks
+# from cloudinary.forms import cl_init_js_callbacks
 from .models import Post, Category, Profile
 from .forms import CommentForm, UpdateProfileForm, AddPostForm
 
@@ -33,13 +34,24 @@ class ViewStory(View):
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.all().order_by("-created_on")
 
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        disliked = False
+        if post.dislikes.filter(id=self.request.user.id).exists():
+            disliked = True
+
         return render(
             request,
             "story/view_post.html",
             {
                 "post": post,
                 "comments": comments,
-                "comment_form": CommentForm()
+                "liked": liked,
+                "disliked": disliked,
+                "comment_form": CommentForm(),
+
             },
         )
 
@@ -48,6 +60,14 @@ class ViewStory(View):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.all().order_by("-created_on")
+
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        disliked = False
+        if post.dislikes.filter(id=self.request.user.id).exists():
+            disliked = True
 
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -64,7 +84,10 @@ class ViewStory(View):
             {
                 "post": post,
                 "comments": comments,
+                "liked": liked,
+                "disliked": disliked,
                 "comment_form": comment_form,
+
             },
         )
 
@@ -169,3 +192,49 @@ def delete_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.delete()
     return redirect('profile')
+
+
+class PostLikes(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+
+        for dislikes in post.dislikes.all():
+            if dislikes == request.user:
+                post.dislikes.remove(request.user)
+                break
+
+        liked = False
+        for likes in post.likes.all():
+            if likes == request.user:
+                liked = True
+                break
+        if not liked:
+            post.likes.add(request.user)
+        if liked:
+            post.likes.remove(request.user)
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))
+
+
+class PostDislikes(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+
+        for likes in post.likes.all():
+            if likes == request.user:
+                post.likes.remove(request.user)
+                break
+
+        disliked = False
+        for dislikes in post.dislikes.all():
+            if dislikes == request.user:
+                disliked = True
+                break
+        if not disliked:
+            post.dislikes.add(request.user)
+        if disliked:
+            post.dislikes.remove(request.user)
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))

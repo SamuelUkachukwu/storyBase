@@ -32,9 +32,34 @@
         <div class="post-body padding">
             {{ post.content | safe }}
         </div>
+
         <div class="reaction padding">
-          <p><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span></p>
-          <p><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span></p>
+        {% if user.is_authenticated %}
+            <form action="{% url 'post_likes' post.slug %}" method="POST">
+                {% csrf_token %}
+                {% if liked %}
+                <button  type="submit"  class="btn-like border-0 bg-transparent"><i class="fas fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span>
+                </button>
+                {% else %}
+                <button  type="submit"  class="btn-like border-0 bg-transparent"><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span>
+                </button>
+                {% endif %}
+            </form>
+
+            <form action="{% url 'post_dislikes' post.slug %}" method="POST">
+                {% csrf_token %}
+                {% if disliked %}
+                <button type="submit"  class="btn-like border-0 bg-transparent"><i class="fas fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span>
+                </button>
+                {% else %}
+                <button type="submit"  class="btn-like border-0 bg-transparent"><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span>
+                </button>
+                {% endif %}
+            </form>
+        {% endif %}
+
+
+
           {% with comments.count as total_comments %}
           <p><i class="far fa-comment-alt" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></i><span> {{ total_comments }}</span></p>
           {% endwith %}
