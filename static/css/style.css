@@ -6,9 +6,11 @@
     --blue: #023059;
     --white: #fff;
     --red: #D92525;
-    --red-soft: #C40056;
+    --red-react: #BA0B2B;
+    --red-soft: #D6005D;
     --grey: #445261;
     --light-grey: #ccc;
+    --black: #000;
 }
 
 * {
@@ -32,7 +34,15 @@ body {
 p {
     margin: 0;
 }
-
+.text-black{
+    color: var(--black);
+}
+.bg-color-blue{
+    background-color: var(--blue);
+}
+.likes-dislikes{
+    color: var(--red-react)
+}
 /* -----------------------navbar styling */
 .nav {
     margin-right: 15px;
