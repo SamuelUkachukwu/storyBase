@@ -32,6 +32,7 @@ class ViewStory(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
+        cat_list = Category.objects.all()
         comments = post.comments.all().order_by("-created_on")
 
         liked = False
@@ -50,6 +51,7 @@ class ViewStory(View):
                 "comments": comments,
                 "liked": liked,
                 "disliked": disliked,
+                'cat_list': cat_list,
                 "comment_form": CommentForm(),
 
             },
@@ -195,7 +197,8 @@ def delete_post(request, slug):
 
 
 class PostLikes(View):
-
+    """this view adds likes to a post
+    checks for dislikes and remove it"""
     def post(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
@@ -218,7 +221,8 @@ class PostLikes(View):
 
 
 class PostDislikes(View):
-
+    """this view adds dislikes to a post
+    checks for likes and remove it"""
     def post(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)

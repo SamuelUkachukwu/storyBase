@@ -8,53 +8,55 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-lg-8">
-      <!-- Post content-->
+
+      <!-- display Post content as list-->
       {% for post in posts %}
-      <article class="mb-5">
-          <div class="row m-0 col-md-12 justify-content-between padding">
-            <p class="col-md-6 username">Post By: <span class="bd-font">{{ post.author }}</span></p>
-            <p class="col-md-6 text-md-end post-date">{{ post.created_on}}</p>
-          </div>
-        <div class="image-container">
-          {% if "placeholder" in post.featured_image.url %}
-          <img class="card-img-top" src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
-          {% else %}
-          <img class="article-img" src="{{ post.featured_image.url }}" alt="image from post">
-          {% endif %}
-          <div class="image-flash">
-            <a href="{% url 'view_post' post.slug %}" class="post-link">
-              <h1 class="fs-5 bd-font post-title">{{ post.title }}</h1>
-            </a>
-          </div>
-        </div>
-        <div class="article-excerpt padding">
-          <p class="excerpt-txt">
-            {{ post.excerpt }}
-          </p>
-        </div>
-        <div class="reaction padding">
-          <p><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span></p>
-          <p><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span></p>
-        </div>
-      </article>
+            <article class="mb-5">
+                <div class="row m-0 col-md-12 justify-content-between padding">
+                    <p class="col-md-6 username">Post By: <span class="bd-font">{{ post.author }}</span></p>
+                    <p class="col-md-6 text-md-end post-date">{{ post.created_on}}</p>
+                </div>
+                <div class="image-container">
+                    {% if "placeholder" in post.featured_image.url %}
+                    <img class="card-img-top" src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
+                    {% else %}
+                    <img class="article-img" src="{{ post.featured_image.url }}" alt="image from post">
+                    {% endif %}
+                  <div class="image-flash">
+                    <a href="{% url 'view_post' post.slug %}" class="post-link">
+                      <h1 class="fs-5 bd-font post-title">{{ post.title }}</h1>
+                    </a>
+                  </div>
+                </div>
+                <div class="article-excerpt padding">
+                    <p class="excerpt-txt">
+                      {{ post.excerpt }}
+                    </p>
+                </div>
+                <div class="reaction padding">
+                  <p><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span></p>
+                  <p><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span></p>
+                </div>
+            </article>
       {% endfor %}
-
     </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
 
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+<!-- handles pagination of list content -->
+      {% if is_paginated %}
+      <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+              {% endif %}
+              {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
 
-    <!----site news content -->
+              {% endif %}
+          </ul>
+      </nav>
+      {% endif %}
+
+    <!---category content displayed as a list -->
     <div class="col-lg-4">
       {% for cat in cat_list %}
       <div class="card cd-tb">

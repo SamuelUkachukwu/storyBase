@@ -5,66 +5,74 @@
 {% block content %}
 
 
-  <!---------------content header -->
-  <div class="container">
-    <div class="row mt-2">
-      <div class="col-lg-8 post-bg padding mb-2">
-        <div class="row display-box g-0">
-          <div class="title-box">
-            <div class="post-title">
-              <a class="text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}"><h1 class="fs-5 post-title"><span class=" bd-font">{{ post.title }}</span><br><span>By:
-                </span><span class="bd-font">{{ post.author }}</span></h1></a>
-                <!-- <p>{{ post.author }}</p> -->
-                <!-- <p>{{ post.category.name }}</p> -->
-            </div>
-          </div>
-          <div class="col-md-7 display-bg">
-            {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top" src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
-            {% else %}
-            <img class="article-img" src="{{ post.featured_image.url }}" alt="image from post">
-            {% endif %}
-          </div>
-          <div class="col-md-5 display-sm">
-            <h1 class="padding post-date">{{ post.created_on}}</h1>
+<!---------------content header -->
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-lg-8 post-bg padding mb-2">
+      <div class="row display-box g-0">
+        <div class="title-box">
+          <div class="post-title">
+            <a class="text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}">
+              <h1 class="fs-5 post-title"><span class=" bd-font">{{ post.title }}</span><br><span>By:
+                </span><span class="bd-font">{{ post.author }}</span></h1>
+            </a>
+            <!-- <p>{{ post.author }}</p> -->
+            <!-- <p>{{ post.category.name }}</p> -->
           </div>
         </div>
-        <div class="post-body padding">
-            {{ post.content | safe }}
+        <div class="col-md-7 display-bg">
+          {% if "placeholder" in post.featured_image.url %}
+          <img class="card-img-top"
+            src="https://res.cloudinary.com/shybold/image/upload/v1654900315/calligraphy-7188024_640_rxyiep.jpg">
+          {% else %}
+          <img class="article-img" src="{{ post.featured_image.url }}" alt="image from post">
+          {% endif %}
         </div>
+        <div class="col-md-5 display-sm">
+          <h1 class="padding post-date">{{ post.created_on}}</h1>
+        </div>
+      </div>
+      <div class="post-body padding">
+        {{ post.content | safe }}
+      </div>
 
-        <div class="reaction padding">
+      <div class="reaction padding">
         {% if user.is_authenticated %}
-            <form action="{% url 'post_likes' post.slug %}" method="POST">
-                {% csrf_token %}
-                {% if liked %}
-                <button  type="submit"  class="btn-like border-0 bg-transparent"><i class="fas fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span>
-                </button>
-                {% else %}
-                <button  type="submit"  class="btn-like border-0 bg-transparent"><i class="far fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span>
-                </button>
-                {% endif %}
-            </form>
+        <form action="{% url 'post_likes' post.slug %}" method="POST">
+          {% csrf_token %}
+          {% if liked %}
+          <button type="submit" class="btn-like border-0 bg-transparent"><i
+              class="fas fa-thumbs-up text-danger"></i><span> {{ post.number_of_likes }}</span>
+          </button>
+          {% else %}
+          <button type="submit" class="btn-like border-0 bg-transparent"><i class="far fa-thumbs-up"></i><span>
+              {{ post.number_of_likes }}</span>
+          </button>
+          {% endif %}
+        </form>
 
-            <form action="{% url 'post_dislikes' post.slug %}" method="POST">
-                {% csrf_token %}
-                {% if disliked %}
-                <button type="submit"  class="btn-like border-0 bg-transparent"><i class="fas fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span>
-                </button>
-                {% else %}
-                <button type="submit"  class="btn-like border-0 bg-transparent"><i class="far fa-thumbs-down"></i><span> {{ post.number_of_dislikes }}</span>
-                </button>
-                {% endif %}
-            </form>
+        <form action="{% url 'post_dislikes' post.slug %}" method="POST">
+          {% csrf_token %}
+          {% if disliked %}
+          <button type="submit" class="btn-like border-0 bg-transparent"><i class="fas fa-thumbs-down"></i><span>
+              {{ post.number_of_dislikes }}</span>
+          </button>
+          {% else %}
+          <button type="submit" class="btn-like border-0 bg-transparent"><i class="far fa-thumbs-down"></i><span>
+              {{ post.number_of_dislikes }}</span>
+          </button>
+          {% endif %}
+        </form>
         {% endif %}
 
 
 
-          {% with comments.count as total_comments %}
-          <p><i class="far fa-comment-alt" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></i><span> {{ total_comments }}</span></p>
-          {% endwith %}
-        </div>
-        <!--  -->
+        {% with comments.count as total_comments %}
+        <p><i class="far fa-comment-alt" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample"></i><span> {{ total_comments }}</span></p>
+        {% endwith %}
+      </div>
+      <!--  -->
       <div class="collapse" id="collapseExample">
         {% if user.is_authenticated %}
         <p>Leave a comment as: <b>{{ user.username }}</b></p>
@@ -73,7 +81,7 @@
             {{ comment_form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-signup btn-lg btn-100">Submit</button>
-        </form>
+          </form>
         </div>
         {% else %}
         <div class="card card-body">
@@ -81,75 +89,86 @@
         </div>
         {% endif %}
       </div>
-        <!-- comments on post -->
-        <hr>
-        <div class="row">
-          <div class="col-md-12 mt-2">
-            <h3 class="padding comment bd-font">Comments:</h3>
-            {% for comment in comments %}
-            <div class="comment-box padding">
-              <p><span class="bd-font">{{ comment.name }}: </span>{{ comment.created_on }}</p>
-              <p class="comment-txt mb-1">{{ comment.body}}</p>
+      <!-- comments on post -->
+      <hr>
+      <div class="row">
+        <div class="col-md-12 mt-2">
+          <h3 class="padding comment bd-font">Comments:</h3>
+          {% for comment in comments %}
+          <div class="comment-box padding">
+            <p><span class="bd-font">{{ comment.name }}: </span>{{ comment.created_on }}</p>
+            <p class="comment-txt mb-1">{{ comment.body}}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- side bar large screen -->
+    <div class="col-md-4 author-info">
+      <div class="side-info">
+        <div class="user-card padding">
+          {% if user.is_authenticated %}
+          <div class="center mt-3 d-flex justify-content-center">
+            <div class="profile-pic-box">
+              <img class="profile-img" src="{{ user.profile.profile_image.url }}" alt="user profile pic">
             </div>
-            {% endfor %}
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <ul class="p-0">
+              <div class="padding text-center mt-3">
+                <li class="list-unstyled text-style bd-font">{{ user.username }}</li>
+              </div>
+              <div class="padding">
+                <li class="list-unstyled"><i class="fas fa-user"></i><a class="padding text-decoration-none text-style"
+                    href="{% url 'profile' %}">Profile</a></li>
+              </div>
+              <div class="padding">
+                <li class="list-unstyled"><i class="fas fa-file-alt"></i><a
+                    class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
+              </div>
+              <hr>
+              <p>Other stories By:</p>
+              <div class="padding">
+                <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
+                    class="padding text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}">
+                    {{ post.author }}</a></li>
+              </div>
+              <p class="pt-4 pb-2">Browse other Categories:</p>
+              {% for cat in cat_list %}
+              <li class="list-unstyled"><a class="padding text-decoration-none text-style"
+                  href="{% url 'category' cat.id %}">{{ cat.name }}</a></li>
+              {% endfor %}
+            </ul>
           </div>
         </div>
       </div>
+      {% else %}
 
-      <div class="col-md-4 author-info">
-        <div class="side-info">
-          <div class="user-card padding">
-{% if user.is_authenticated %}
-<div class="center mt-3 d-flex justify-content-center">
-  <div class="profile-pic-box">
-    <img class="profile-img" src="{{ user.profile.profile_image.url }}" alt="user profile pic">
-  </div>
-</div>
-
-<div class="d-flex justify-content-center">
-  <ul class="p-0">
-    <div class="padding text-center mt-3">
-      <li class="list-unstyled text-style bd-font">{{ user.username }}</li>
-    </div>
-    <div class="padding">
-      <li class="list-unstyled"><i class="fas fa-user"></i><a
-          class="padding text-decoration-none text-style" href="{% url 'profile' %}">Profile</a></li>
-    </div>
-    <div class="padding">
-      <li class="list-unstyled"><i class="fas fa-file-alt"></i><a
-          class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
-    </div>
-    <hr>
-    <p>Other stories By:</p>
-    <div class="padding">
-      <li class="list-unstyled"><i class="fas fa-pen-fancy"></i><a
-          class="padding text-decoration-none text-style" href="{% url 'author' pk=post.author_id %}">
-          {{ post.author }}</a></li>
-    </div>
-  </ul>
-</div>
-</div>
-</div>
-{% else %}
-<div class="text-center">
-<div class="padding mt-4">
-  <p>Join our fast growing community of talented writers all over the world and let your creative spirit loose. </p>
-  <p class="mt-3">Did you enjoy <b>{{ post.author }}'s</b> story? Resgister or login to read more and comment on stories</p>
-  <div class="call-to-atn">
-    <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
-  </div>
-  <hr class="mt-4">
-</div>
-<div class="padding">
-  <p>View other stories by <a class="text-decoration-none text-style" href="{% url 'account_signup' %}"><b>{{ post.author }}</b></a></p>
-  <p class="mt-4"> Only on
-    <span class="logo1">story</span><span class="logo2">BASE </span><i class="fas fa-pen-alt"></i></p>
-</div>
-</div>
-{% endif %}
-
+      <!-- display for user not authenticated -->
+      <div class="text-center">
+        <div class="padding mt-4">
+          <p>Join our fast growing community of talented writers all over the world and let your creative spirit loose.
+          </p>
+          <p class="mt-3">Did you enjoy <b>{{ post.author }}'s</b> story? Resgister or login to read more and comment on
+            stories</p>
+          <div class="call-to-atn">
+            <a class="nav-link" href="{% url 'account_signup' %}">Resgister</a>
+          </div>
+          <hr class="mt-4">
+        </div>
+        <div class="padding">
+          <p>View other stories by <a class="text-decoration-none text-style"
+              href="{% url 'account_signup' %}"><b>{{ post.author }}</b></a></p>
+          <p class="mt-4"> Only on
+            <span class="logo1">story</span><span class="logo2">BASE </span><i class="fas fa-pen-alt"></i></p>
+        </div>
       </div>
+      {% endif %}
+
     </div>
   </div>
+</div>
 
 {% endblock %}
