@@ -10,7 +10,7 @@
         <div class="col-md-4">
             <div class="profile">
                 <div class="avatar">
-                    {% if "placeholder_img" in profile.profile_image.url %}
+                    {% if "placeholder" in user.profile.profile_image.url %}
                     <img class="avatar-img img-fluid border border-3" style="object-fit: cover;"
                         src="https://res.cloudinary.com/shybold/image/upload/v1656014926/31a5f800-0a92-47bf-82a9-77c89017f21b_zgidz8.png"
                         alt="profile image">
@@ -42,7 +42,6 @@
             <div class="mb-3">
                 <a class="text-decoration-none bd-font text-black" href="{% url 'update_profile' %}">Edit Profile</a> |
                 <a class="text-decoration-none bd-font text-black" href="{% url 'add_story' %}">Submit New Story</a> |
-
             </div>
 
             {% for post in posts %}

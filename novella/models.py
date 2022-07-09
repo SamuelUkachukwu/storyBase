@@ -62,7 +62,7 @@ class Post(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = CloudinaryField('image', default='placeholder_img')
+    profile_image = CloudinaryField('image', default='placeholder')
     bio = models.TextField(max_length=250, blank=True, null=True)
     twitter = models.CharField(max_length=30, blank=True, null=True)
 
