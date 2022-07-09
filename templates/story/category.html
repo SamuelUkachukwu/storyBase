@@ -12,7 +12,9 @@
 
       <div class="col-md-12">
         <div class="card-body">
-          <h5 class="card-title bd-font">{{ post.title }}</h5>
+          <h5 class="card-title bd-font">
+            {{ post.title }} | <span class="text-muted fs-6">Published under {{ post.category }}</span>
+          </h5>
             <p class="card-text"> {{ post.excerpt }}</p>
             <div class="d-flex justify-content-around text-muted mt-3">
               <p>Published By <b class="text-dark bd-font">{{ post.author }}</b> | {{ post.created_on }}</p>

@@ -1,43 +1,41 @@
 # StoryBase
 
-StoryBase is a storytelling website created using Django framework. The site allows users to post thier creative ideas as story blogs. Stories are published into a set category chosen by the site admin. To post stories a site user must registered and be logged in.
+StoryBase is a storytelling website created using Django framework. The site allows users to post thier creative ideas as story blogs. Stories are published into a set category chosen by the site admin. To post stories a site user must be registered and be logged in.
 
 
 
-![responsive design of the website from ami.responsive.com](assets/images/responsive-test.jpg)
+![responsive design of the website from ami.responsive.com](static/img)
 
-The user (pharmacist or pharmacy attendant) matches the patient id recorded in the data base and the information of the patient is displayed on screen this helps the user make an informed decision and chose to record dosing and dispensing information or not.
+The site is responsive and can be easily asscesed with full functionality in full screen, tablet and mobile screen
 
 ## Features
+Navigation bar containing site logo that is also a home button and a login link beside a call to action register button
 
-Patients are given unique identity and  this serves as a key to verify if the patient is in the data base list or not. It also prevents entering wrong input to gain access to patients information or write into the data base.
+![navigation user not logged in](static/img/user_not_logged_in.png)
 
-![validation of patients id](assets/images/validation-of-patient-id.jpg)
+If user is logged in the registered username appears as a link to the far right. On click the username drops down to a tab with links to view the logged in user profile, submit new story or logout of the site.
 
-If the patient id matches that in the data base, the patients information is displayed and the patients next visit is calculated with the last visit data.
+![navigation user logged in](static/img/logged_in_user.png)
 
-![display of patients drug information](assets/images/patient-information-display.jpg)
+on the home page, post by site users are listed in rows to the left in order of new to old posts and peginated by 20 post.
+![home page](static/img/homepage.png)
 
-If the input value is correct but not in the data base the user is prompted to create new account or not.
-The user can then follow the on-screen prompt to create and record a new patient account
+To the right of the home page is a list of categories chosen by the site admin and can only be modified by the site admin. Each categorry has a link to a page with only post listed under that category.
 
-![input validation](assets/images/input-validation.jpg)
+![category list page](static/img/category_page.png)
+site users need to be logged in to view the category page
 
-In the case of existing patients with or without records the user can choose to enter new records for the patient. This records and write the information to a spreadsheet sheet.
 
-![Create new patient account](assets/images/create-new-acount.jpg)
+each post can be viewed in detail by clicking the Title of the post this takes the site user to a detail view page where logged in users can interact with the post by liking or disliking the post or leaving a public comment.
+site users not logged in are requested to do so to be able to interact with the post they are viewing.
+![request to login before interaction]()
 
-The recorded drug information is then displayed with the calculated dosing instruction for the user (pharmacist or pharmacy assistant)
-
-![new drug input display](assets/images/new-medication-recorded.jpg)
 
 ### Features left to implement
-* Allow for more than one medication to be enter
-* Allow display of more than one recorded drug entry
+*
 
 ### Data Model
-![Data Model](assets/images/medplus-project-data-model.jpeg)
-The app uses a google doc spreadsheet and google drive API to store and retrieve data. Patient information is stored in the patient’s worksheet and organised columns of Patient ID, First Name, Last Name, Year of Birth. Each patient is assigned a worksheet due to the nature or the drug treatment and disease patient are required to be on medication for series of weeks to a life time thus the need to have individual worksheets assigned to a single patient.
+![Data Model]()
 
 ### Testing
 I have tested the code by doing the following:
@@ -48,7 +46,7 @@ I have tested the code by doing the following:
 * Recruited help from friends to use app and offer feedback
 
 ### Bugs:
-Values on the special note input were written in uppercase when I deployed the codes to Heroku this was fixed using the .lower() method.
+none found
 
 ### Deployment
 The project was deployed to Heroku
@@ -64,5 +62,4 @@ The project was deployed to Heroku
 
 ### Credits
 * Code Institute for the deployment terminal [Code Institute](https://codeinstitute.net/ie/)
-* [Lucid App](https://lucid.app)
 * Ukachukwu Abimbola [@Nurse_Ukachukwu](https://twitter.com/nurse_ukachukwu) for external user testing.
