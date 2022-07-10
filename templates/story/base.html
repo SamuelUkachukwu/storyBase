@@ -47,13 +47,13 @@
 
       <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-        <span class="navbar-toggler-icon"></span>
+        <span class="hamburger"></span>
       </button>
-      <div class="offcanvas offcanvas-end bg-color-blue offcanvas-theme" tabindex="-1" id="offcanvasNavbar"
+      <div class="offcanvas offcanvas-end offcanvas-theme" tabindex="-1" id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header pt-3 pe-4">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <span class="border-0 bg-transparent hamburger-close fs-3 text-white" data-bs-dismiss="offcanvas" aria-label="Close"></span>
         </div>
         <div class="offcanvas-body text-center">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -67,6 +67,13 @@
 
                     <li class="list-unstyled padding mt-2"><i class="fas fa-file-alt"></i><a
                         class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
+
+                        {% for cat in cat_list %}
+                  <li class="list-unstyled mt-3"><a class="padding text-decoration-none text-style"
+                      href="{% url 'category' cat.id %}">{{ cat.name }}</a></li>
+                  {% endfor %}
+
+
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                     </li>

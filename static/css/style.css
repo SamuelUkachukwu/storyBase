@@ -34,15 +34,19 @@ body {
 p {
     margin: 0;
 }
-.text-black{
+
+.text-black {
     color: var(--black);
 }
-.bg-color-blue{
+
+.bg-color-blue {
     background-color: var(--blue);
 }
-.likes-dislikes{
+
+.likes-dislikes {
     color: var(--red-react)
 }
+
 /* -----------------------navbar styling */
 .nav {
     margin-right: 15px;
@@ -88,6 +92,10 @@ p {
     padding: 30px 0;
 }
 
+.offcanvas-theme {
+    background-color: var(--dark-blue);
+}
+
 .call-to-atn {
     background-color: var(--red);
     border-radius: 20px;
@@ -95,6 +103,57 @@ p {
 
 .call-to-atn:hover {
     background-color: var(--powder-blue);
+}
+
+.hamburger {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-right: 20px;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    width: 1.5em;
+    height: 3px;
+    background-color: var(--white);
+    transition: transform 250ms ease-in-out;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    right: 0;
+}
+
+.hamburger::before {
+    bottom: 6px;
+}
+
+.hamburger::after {
+    top: 6px;
+}
+
+.hamburger-close {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
+}
+
+.hamburger-close:after {
+    content: "\274c";
+    font-size: 1em;
+    line-height: 40px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 /* -----------------------scrollbar styling */
@@ -140,8 +199,6 @@ p {
     border-radius: 2px;
     overflow: hidden;
 }
-
-
 
 .card-bd,
 .txt-back-drop {
