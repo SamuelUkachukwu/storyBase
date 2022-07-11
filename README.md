@@ -69,7 +69,6 @@ Pep8 Validation: No errors returned
 
 Unittest:
 Unit test was created to test the form.py, views.py and models.py
-![Unit Test](static/img/)
 
 ### Bugs
 * none found
