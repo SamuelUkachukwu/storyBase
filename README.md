@@ -4,7 +4,7 @@ StoryBase is a storytelling website created using Django framework. The site all
 
 
 
-![responsive design of the website from ami.responsive.com](static/img)
+![responsive design of the website from ami.responsive.com](static/img/amiresponsivetest.png)
 
 The site is responsive and can be easily asscesed with full functionality in full screen, tablet and mobile screen
 

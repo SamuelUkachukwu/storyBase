@@ -64,9 +64,9 @@
         <div class="txt-back-drop">
           <div class="card-body card-bd padding">
             {% if user.is_authenticated %}
-            <a class="bd-font fs-5 nav-link p-0" href="{% url 'category' cat.id %}">{{ cat.name }}</a>
+            <a class="bd-font fs-5 nav-link p-0 text-uppercase" href="{% url 'category' cat.id %}">{{ cat.name }}</a>
             {% else %}
-            <a class="bd-font fs-5 nav-link p-0" href="{% url 'account_signup' %}">{{ cat.name }}</a>
+            <a class="bd-font fs-5 nav-link p-0 text-uppercase" href="{% url 'account_signup' %}">{{ cat.name }}</a>
             {% endif %}
 
             <p class="card-text">{{ cat.describe }}</p>
