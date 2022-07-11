@@ -23,19 +23,39 @@ on the home page, post by site users are listed in rows to the left in order of 
 To the right of the home page is a list of categories chosen by the site admin and can only be modified by the site admin. Each categorry has a link to a page with only post listed under that category.
 
 ![category list page](static/img/category_page.png)
-site users need to be logged in to view the category page
+site users need to be logged in to view the category page.
 
 
-each post can be viewed in detail by clicking the Title of the post this takes the site user to a detail view page where logged in users can interact with the post by liking or disliking the post or leaving a public comment.
+Each post can be viewed in detail by clicking the Title of the post this takes the site user to a detail view page where logged in users can interact with the post by liking or disliking the post or leaving a public comment.
 site users not logged in are requested to do so to be able to interact with the post they are viewing.
-![request to login before interaction]()
+![request to login before interaction](static/img/sign_in_required.png)
+
+In addition to being able to intaract with posts, registered users can also add, edit and delete own posts in a custom user page.
+![private profile page](static/img/user_profile_page.png)
+
+When each post is viewed, site users can also view a public profile of the author with a list of all the authors published post sorted in order of new to old.
+![public profile page](static/img/public_profile.png)
 
 
 ### Features left to implement
-*
+* Follow Author functionality
 
-### Data Model
-![Data Model]()
+### Model
+Relational Database Model wasi used in this project
+![Data Model](static/img/relational%20database%20model.png)
+
+### Languages, Framework and Library
+* HTML5
+* CSS
+* PYTHON
+* Bootstarp 5
+* DJANGO
+* JavaScript
+* Django-allauth
+* Cloudinary
+* Crispy-form
+* Summernote
+
 
 ### Testing
 I have tested the code by doing the following:
@@ -58,8 +78,9 @@ The project was deployed to Heroku
 5. Scroll down and setup automatic deploy to allow Heroku to update app from gitpod push and click on the manual deploy option.
 6. click view to view the app.
 
- View app here: [Medplus Pharmacy](https://medplus-pharmacy.herokuapp.com/)
+ View app here: [storyBASE](https://story-base.herokuapp.com/)
 
 ### Credits
 * Code Institute for the deployment terminal [Code Institute](https://codeinstitute.net/ie/)
+* Pixabay for the images used on the site [Pixabay](https://pixabay.com/)
 * Ukachukwu Abimbola [@Nurse_Ukachukwu](https://twitter.com/nurse_ukachukwu) for external user testing.

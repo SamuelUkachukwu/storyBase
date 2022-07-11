@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!---------------------- tmplate this section below--- -->
+
 
 <div class="container-md">
     <div class="row mt-5">
@@ -38,7 +38,7 @@
 
         <!-- stories submited by author -->
         <div class="col-md-8">
-            <!--  -->
+            <!-- top keys edit-profile and add new story -->
             <div class="mb-3">
                 <a class="text-decoration-none bd-font text-black" href="{% url 'update_profile' %}">Edit Profile</a> |
                 <a class="text-decoration-none bd-font text-black" href="{% url 'add_story' %}">Submit New Story</a> |
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <!----delete modal---->
+                <!-- delete modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">

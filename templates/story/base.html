@@ -52,31 +52,22 @@
       <div class="offcanvas offcanvas-end offcanvas-theme" tabindex="-1" id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header pt-3 pe-4">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+
           <span class="border-0 bg-transparent hamburger-close fs-3 text-white" data-bs-dismiss="offcanvas" aria-label="Close"></span>
         </div>
         <div class="offcanvas-body text-center">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             {% if user.is_authenticated %}
                 {% if user.id %}
-                    <div class="padding text-center mt-3">
-                      <li class="list-unstyled text-style bd-font">{{ user.username }}</li>
-                    </div>
+                    <li class="list-unstyled text-style bd-font padding text-center mt-3">{{ user.username }}</li>
                     <li class="list-unstyled padding mt-2"><i class="fas fa-user"></i><a
                         class="padding text-decoration-none text-style" href="{% url 'profile'%}">Profile</a></li>
-
                     <li class="list-unstyled padding mt-2"><i class="fas fa-file-alt"></i><a
                         class="padding text-decoration-none text-style" href="{% url 'add_story' %}">Submit Story</a></li>
-
-                        {% for cat in cat_list %}
-                  <li class="list-unstyled mt-3"><a class="padding text-decoration-none text-style"
-                      href="{% url 'category' cat.id %}">{{ cat.name }}</a></li>
-                  {% endfor %}
-
-
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
+                {% for cat in cat_list %}
+                    <li class="list-unstyled mt-3"><a class="padding text-decoration-none text-style" href="{% url 'category' cat.id %}">{{ cat.name }}</a></li>
+                {% endfor %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Logout</a></li>
                 {% endif %}
             {% else %}
             <li class="nav-item">
@@ -96,13 +87,13 @@
   <!-- content here -->
   {% endblock content %}
 
-  <!-----------------------------------------footer -->
+  <!-- footer -->
   <footer class="copyright padding">
     <p id="copyright-text">copyright &#169; <span class="logo1">story</span><span class="logo2">BASE</span> &reg;
       <span id="copy-right"></span>
     </p>
   </footer>
-  <!------------------------------------javascripts -->
+  <!-- javascripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
