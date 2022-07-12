@@ -178,7 +178,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SUMMERNOTE_THEME = 'bs5'
+SUMMERNOTE_THEME = 'bs4'
 
 SUMMERNOTE_CONFIG = {
 
@@ -189,7 +189,13 @@ SUMMERNOTE_CONFIG = {
     'lang': None,
     'toolbar': [
         ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
+        ['font', [
+            'bold',
+            'underline',
+            'strikethrough',
+            'superscript',
+            'subscript']],
+        ['fontsize', ['fontsize']],
         ['fontname', ['fontname']],
         ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
