@@ -13,7 +13,7 @@
     <div class="col-md-4">
       <div class="profile">
         <div class="avatar">
-          {% if "placeholder_img" in author.profile_image.url %}
+          {% if "placeholder" in author.profile_image.url %}
           <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src="https://res.cloudinary.com/shybold/image/upload/v1656014926/31a5f800-0a92-47bf-82a9-77c89017f21b_zgidz8.png" alt="profile image">
           {% else %}
           <img class="avatar-img img-fluid border border-3" style="width: 100%; object-fit: cover;" src="{{ author.profile_image.url }}"
