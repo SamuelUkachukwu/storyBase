@@ -73,7 +73,12 @@
     <div class="col-lg-4">
       {% for cat in cat_list %}
       <div class="card cd-tb">
-        <img src="{{ cat.cat_image.url }}" class="card-img-top" alt="category image placeholders">
+        {% if "category_placeholder" in cat.cat_image.url %}
+                    <img src="https://res.cloudinary.com/shybold/image/upload/v1657726462/20220713_162824_hnmgmp.png">
+                    {% else %}
+                    <img src="{{ cat.cat_image.url }}" class="card-img-top" alt="category image placeholders">
+                    {% endif %}
+
         <div class="txt-back-drop">
           <div class="card-body card-bd padding">
             {% if user.is_authenticated %}
