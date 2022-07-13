@@ -51,6 +51,8 @@
 
             <p class="card-text"> {{ post.excerpt }}</p>
             <div class="padding">
+              <i
+            class="fas fa-thumbs-up fs-6"></i><span class="fs-6"> {{ post.number_of_likes }}</span> | <i class="fas fa-thumbs-down fs-6"></i><span  class="fs-6"> {{ post.number_of_dislikes }}</span> |
               <a href="{% url 'view_post' post.slug %}" class="text-decoration-none bd-font"><i class="fab fa-readme"></i>...READ STORY</a>
             </div>
           </div>

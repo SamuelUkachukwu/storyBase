@@ -22,7 +22,6 @@
 
 body {
     background-color: var(--powder-blue);
-    /* position: relative; */
 }
 
 .bd-font {
@@ -94,6 +93,14 @@ p {
 
 .offcanvas-theme {
     background-color: var(--dark-blue);
+}
+
+.navbar-toggler {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    border-radius:0;
+    transition:none;
 }
 
 .call-to-atn {
@@ -262,7 +269,6 @@ article {
 .reaction {
     background-color: var(--white);
     display: flex;
-    /* margin-right: 10px; */
     justify-content: space-around;
 }
 
@@ -305,8 +311,7 @@ article {
     background-color: var(--red-soft);
     text-align: center;
     max-width: 60%;
-    /* min-width: 40%; */
-    bottom: 4%;
+     bottom: 4%;
     left: 35%
 }
 
@@ -316,7 +321,10 @@ article {
     padding: 20px;
     width: 100%;
 }
-
+.read-story{
+    display: flex;
+    justify-content: space-around;
+}
 /* ------------comment styling */
 .comment-txt {
     background-color: var(--light-grey);
@@ -435,5 +443,9 @@ article {
 
     .profile {
         display: flex;
+    }
+    .read-story{
+        display: block;
+        text-align: center;
     }
 }

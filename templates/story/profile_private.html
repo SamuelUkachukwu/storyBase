@@ -51,7 +51,9 @@
                         <h5 class="card-title bd-font">{{ post.title }} |
                             <span class="text-muted fs-6">
                             {% if post.status == 1%}
-                            {{ post.category }} | Published
+                            {{ post.category }} | Published | <i
+                            class="fas fa-thumbs-up"></i><span> {{ post.number_of_likes }}</span> | <i class="fas fa-thumbs-down"></i><span>
+                                {{ post.number_of_dislikes }}</span>
                             {% else %}
                             {{ post.category }} | Draft
                             {% endif %}</span>

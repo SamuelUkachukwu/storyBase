@@ -8,10 +8,11 @@ StoryBase is a storytelling website created using Django framework. The site all
 * Logged in users ability to interact with posts
 
 ## Features
-•	Responsiveness:
-![responsive design of the website from ami.responsive.com](static/img/amiresponsivetest.png)
+#### Responsiveness:
 The site is responsive and can be easily accessed with full functionality in full screen, tablet and mobile screen
-•	Navigation:
+![responsive design of the website from ami.responsive.com](static/img/amiresponsivetest.png)
+
+#### Navigation:
 Navigation bar containing site logo that is also a home button and a login link beside a call to action register button
 ![navigation user not logged in](static/img/user_not_logged_in.png)
 
@@ -57,17 +58,27 @@ Relational Database Model was used in this project
 
 ### Testing
 The codes were tested by doing the following:
-Manual Testing:
+#### Manual Testing:
 1.	Entered invalid inputs and wrong inputs where inputs are requested with respect to integers and strings.
 2.	Recruited help from friends to use app and offer feedback
+3.  Lunching site on different devices and browsers to check for responsiveness and bugs.
+    * google chrom
+    * fire fox
+    * microsoft edge
+    * Operamini
 
-W3C CSS Validation: No Errors returned
+#### W3C CSS Validation: No Errors returned
 ![CSS validation](static/img/css_validation.png)
 
-Pep8 Validation: No errors returned
+#### Pep8 Validation: No errors returned
 ![pep8 validation](static/img/pep8_check.png)
 
-Unittest:
+#### Accessibility:
+
+Accessibility testing was conducted using light house devtools and it confirmed that the fonts and colors selected are easy to read and accecssible.
+![lighthouse validation](static/img/lighthousetest.png)
+
+#### Unittest:
 Unit test was created to test the form.py, views.py and models.py
 
 ### Bugs
@@ -86,9 +97,14 @@ DJANGO_URL, SECRET_KEY, PORT and CLOUDINARY_URL
 7. In the deploy section select github and search for the repository name. link up the Heroku app to the github repository code.
 8. Scroll down and setup automatic deploy to allow Heroku to update app from gitpod push and click on the manual deploy option.
 9. click view to view the app.
-View app here: [storyBASE](https://story-base.herokuapp.com/)
+* View app here: [storyBASE](https://story-base.herokuapp.com/)
 
 ### Credits
-* Code Institute for the deployment terminal [Code Institute](https://codeinstitute.net/ie/)
+* Code Institute [Code Institute](https://codeinstitute.net/ie/)
 * Pixabay for the images used on the site [Pixabay](https://pixabay.com/)
 * Ukachukwu Abimbola [@Nurse_Ukachukwu](https://twitter.com/nurse_ukachukwu) for external user testing.
+
+### Awknowledgements
+* Code Institute Tutor Assistance
+* Caleb Mbakwe Mentor
+* Sherifat and Olivia for all the love and support

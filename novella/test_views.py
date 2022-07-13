@@ -16,7 +16,6 @@ class TestViews(TestCase):
         )
         category = Category.objects.create(
             name='Romance'
-
         )
         post = Post.objects.create(
             title='Test1',
@@ -37,7 +36,7 @@ class TestViews(TestCase):
         response = self.client.get(f'/author/{user.id}/')
         self.assertEqual(response.status_code, 200)
 
-    def test_get_category_view(self):#
+    def test_get_category_view(self):
         category = Category.objects.create(
             name='Romance'
 

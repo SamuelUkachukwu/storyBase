@@ -64,6 +64,6 @@ class AddPostForm(forms.ModelForm):
                 'class': 'form-control padding',
                 "rows": 2,
                 "cols": 20,
-                'placeholder': 'Sumary of Post Here'
+                'placeholder': 'Summary of Post Here'
                 })
         }
