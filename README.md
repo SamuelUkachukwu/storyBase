@@ -91,12 +91,13 @@ The project was deployed to Heroku with the following steps:
 2.  in the settings section reveal the config var and enter the key and value pair from the settings.py file
 DJANGO_URL, SECRET_KEY, PORT and CLOUDINARY_URL
 3.	on the Resources tab select Heroku Postgres as the database
-4.	on the CLI create a requirements.txt file using the command “pip3 freeze –local > requirements.txt”
-5.	Add a Procfile with the required codes in it
-6.	Change Debug to False and commit repository to Github.
-7. In the deploy section select github and search for the repository name. link up the Heroku app to the github repository code.
-8. Scroll down and setup automatic deploy to allow Heroku to update app from gitpod push and click on the manual deploy option.
-9. click view to view the app.
+4. on the treminal type 'python3 manage.py makemigrations' and 'python3 manage.py migrate' to migrate ur database.
+5.	on the CLI create a requirements.txt file using the command “pip3 freeze –local > requirements.txt”
+6.	Add a Procfile with the required codes in it
+7.	Change Debug to False and commit repository to Github.
+8. In the deploy section select github and search for the repository name. link up the Heroku app to the github repository code.
+9. Scroll down and setup automatic deploy to allow Heroku to update app from gitpod push and click on the manual deploy option.
+10. click view to view the app.
 * View app here: [storyBASE](https://story-base.herokuapp.com/)
 
 ### Credits
