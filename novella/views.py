@@ -149,6 +149,7 @@ def update_profile(request):
         })
 
 
+@login_required
 def category_view(request, category):
     """This takes the site user to a category template
     where they can view post sorted in categories"""
