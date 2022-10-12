@@ -10,7 +10,7 @@ class UserProfile(admin.ModelAdmin):
     list_filter = ('user',)
     search_fields = ['user', 'post']
 
-    
+
 @admin.register(models.Post)
 class PostAdmin(SummernoteModelAdmin):
 

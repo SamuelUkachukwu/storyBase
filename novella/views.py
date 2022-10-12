@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.contrib.auth.decorators import login_required
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 
@@ -118,6 +119,7 @@ class ProfilePublic(generic.ListView):
         return context
 
 
+@login_required
 def profile_private(request):
     """ This function take the logged in user to their profile page
     where they can edit their profile add new post and delete post"""
@@ -126,6 +128,7 @@ def profile_private(request):
     return render(request, 'story/profile_private.html', {'posts': context})
 
 
+@login_required
 def update_profile(request):
     """This function allows the user to edit their profile"""
 
@@ -157,6 +160,7 @@ def category_view(request, category):
         })
 
 
+@login_required
 def add_post(request):
     context = dict(backend_form=AddPostForm())
     if request.method == 'POST':
@@ -171,6 +175,7 @@ def add_post(request):
     return render(request, 'story/add_post.html', context)
 
 
+@login_required
 def edit_post(request, slug):
     """This function edit's a post"""
     post = Post.objects.get(slug=slug)
@@ -189,6 +194,7 @@ def edit_post(request, slug):
         })
 
 
+@login_required
 def delete_post(request, slug):
     """This function deletes a selected post"""
     post = get_object_or_404(Post, slug=slug)

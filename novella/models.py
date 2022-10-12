@@ -28,7 +28,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='post')
-    content = models.TextField()
+    content = models.TextField(null=False, blank=False)
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
