@@ -1,6 +1,6 @@
 # storyBASE
 StoryBase is a storytelling website created using Django framework. The site allows users to post thier creative ideas as story blogs. Stories are published into a set category chosen by the site admin. To post stories a site user must be registered and be logged in.
-
+* The Deployed App can be viewed here [storyBASE](https://storybase.onrender.com)
 ## Table of Content
 
 - [Responsiveness](#responsiveness)
@@ -172,7 +172,7 @@ DJANGO_URL, SECRET_KEY, PORT and CLOUDINARY_URL
 1. In the deploy section select github and search for the repository name. link up the Heroku app to the github repository code.
 1. Scroll down and setup automatic deploy to allow Heroku to update app from gitpod push and click on the manual deploy option.
 1. click view to view the app.
-* The Deployed App can be viewed here [storyBASE](https://story-base.herokuapp.com/)
+* The Deployed App can be viewed here [storyBASE](https://storybase.onrender.com)
 
 [back to content](#table-of-content)
 
